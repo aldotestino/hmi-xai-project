@@ -1,7 +1,6 @@
 import { Patient } from '@/lib/types';
 import PatientForm from './patient-form';
-import { Separator } from './ui/separator';
-
+import SidebarHeader from './sidebar-header';
 interface SidebarProps {
   onFormSubmit: (values: Patient) => void;
   isFormLoading: boolean;
@@ -10,12 +9,8 @@ interface SidebarProps {
 function Sidebar({ onFormSubmit, isFormLoading }: SidebarProps) {
 
   return (
-    <div className="bg-white w-72 h-full border-r shadow-md grid grid-rows-[auto,1fr] overflow-y-hidden rounded-r-xl">
-      <div>
-        <h1 className="p-4 text-3xl font-semibold">Diabetes</h1>
-        <Separator />
-        <p className='p-4 text-lg font-semibold text-muted-foreground'>Features</p>
-      </div>
+    <div className="bg-white w-80 h-full border-r shadow-md grid grid-rows-[auto,1fr] overflow-y-hidden rounded-r-xl">
+      <SidebarHeader />
       <PatientForm onSubmit={onFormSubmit} isLoading={isFormLoading} />
     </div>
   );
