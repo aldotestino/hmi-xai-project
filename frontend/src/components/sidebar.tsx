@@ -7,10 +7,10 @@ interface SidebarProps {
   isFormLoading: boolean;
 }
 
-function sidebar({ onFormSubmit, isFormLoading }: SidebarProps) {
+function Sidebar({ onFormSubmit, isFormLoading }: SidebarProps) {
 
   return (
-    <div className="bg-white min-w-80 w-1/4 h-full border-r shadow-md grid grid-rows-[auto,1fr] overflow-y-hidden rounded-r-xl">
+    <div className="bg-white w-72 h-full border-r shadow-md grid grid-rows-[auto,1fr] overflow-y-hidden rounded-r-xl">
       <div>
         <h1 className="p-4 text-3xl font-semibold">Diabetes</h1>
         <Separator />
@@ -21,4 +21,4 @@ function sidebar({ onFormSubmit, isFormLoading }: SidebarProps) {
   );
 }
 
-export default sidebar;
+export default Sidebar;

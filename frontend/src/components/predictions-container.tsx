@@ -11,7 +11,7 @@ function PredictionsContainer({ predictions }: PredictionsContainerProps) {
     return (
       <main className="flex flex-col items-center justify-center gap-2 text-slate-500">
         <Inbox size={50} />
-        <p className='text-lg font-semibold text-center'>Compile the form on the right to start...</p>
+        <p className='text-lg font-semibold text-center'>Fill out the form to get started...</p>
       </main>
     );
   }
