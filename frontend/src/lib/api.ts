@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Patient, PatientPrediction } from './types';
 
 const client = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: import.meta.env.VITE_BACKEND_URL as string
 });
 
 export async function predict(values: Patient) {
