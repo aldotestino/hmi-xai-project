@@ -2,7 +2,7 @@ import { Patient } from '@/lib/types';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
 import { Input } from './ui/input';
 import { Control } from 'react-hook-form';
-import { patientFiels } from '@/lib/constants';
+import { patientFields } from '@/lib/constants';
 
 interface PatientFormFieldProps {
   name: keyof Patient;
@@ -11,7 +11,7 @@ interface PatientFormFieldProps {
 
 function PatientFormField({ name, formControl }: PatientFormFieldProps) {
   
-  const { label, description } = patientFiels[name];
+  const { label, description } = patientFields[name];
 
   return (
     <FormField

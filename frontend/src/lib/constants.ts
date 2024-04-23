@@ -1,6 +1,6 @@
 import { PatientFields } from './types';
 
-export const patientFiels: PatientFields = {
+export const patientFields: PatientFields = {
   pregnancies: {
     label: 'Pregnancies',
     description: 'Number of times pregnant',

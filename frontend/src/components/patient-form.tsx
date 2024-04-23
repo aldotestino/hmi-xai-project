@@ -30,15 +30,17 @@ function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
     
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='grid grid-rows-[1fr,auto] overflow-y-hidden'>
-        
-        <div className='px-4 space-y-2 overflow-y-scroll'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='grid grid-rows-[auto,1fr,auto] overflow-y-hidden'>
+
+        <p className='px-4 pt-4 text-lg font-semibold text-muted-foreground'>Features</p>
+
+        <div className='p-4 space-y-2 overflow-y-scroll'>
           {Object.keys(patientSchema.shape).map(key => (
             <PatientFormField key={key} name={key as keyof Patient} formControl={form.control} />
           ))}
         </div>
         
-        <div className='pt-4'>
+        <div>
           <Separator />
           <div className='p-4 text-right'>
             <Button disabled={isLoading} type="submit" className="inline-flex items-center">

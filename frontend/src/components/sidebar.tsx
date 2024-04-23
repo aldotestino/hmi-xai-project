@@ -1,6 +1,7 @@
 import { Patient } from '@/lib/types';
 import PatientForm from './patient-form';
 import SidebarHeader from './sidebar-header';
+
 interface SidebarProps {
   onFormSubmit: (values: Patient) => void;
   isFormLoading: boolean;
