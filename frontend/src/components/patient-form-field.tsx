@@ -1,7 +1,8 @@
 import { Patient } from '@/lib/types';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
 import { Input } from './ui/input';
 import { Control } from 'react-hook-form';
+import { patientFiels } from '@/lib/constants';
 
 interface PatientFormFieldProps {
   name: keyof Patient;
@@ -9,16 +10,20 @@ interface PatientFormFieldProps {
 }
 
 function PatientFormField({ name, formControl }: PatientFormFieldProps) {
+  
+  const { label, description } = patientFiels[name];
+
   return (
     <FormField
       control={formControl}
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className='capitalize'>{name}</FormLabel>
+          <FormLabel>{label}</FormLabel>
           <FormControl>
             <Input type="number" {...field} />
           </FormControl>
+          {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
         </FormItem>
       )}

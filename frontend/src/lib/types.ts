@@ -23,3 +23,10 @@ export type PatientPrediction = {
     [key in keyof Patient]: number;
   }
 }
+
+export type PatientFields = {
+  [key in keyof Patient]: {
+    label: string;
+    description?: string;
+  }
+}
