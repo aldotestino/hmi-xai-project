@@ -5,13 +5,13 @@ from shap_model import ShapModel
 from typing import List
 
 class ModelAPI(FastAPI):
-    def __init__(self, model: ShapModel, allow_origins: List[str] = None):
+    def __init__(self, model: ShapModel, allow_origins: List[str] = ["*"]):
         super().__init__()
         self.model = model
         self.configure_middleware(allow_origins)
         self.add_endpoints()
 
-    def configure_middleware(self, allow_origins: List[str] = ["*"]):
+    def configure_middleware(self, allow_origins: List[str]):
         self.add_middleware(
             CORSMiddleware,
             allow_origins=allow_origins,
