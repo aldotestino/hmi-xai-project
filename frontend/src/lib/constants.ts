@@ -1,4 +1,6 @@
+import { ChartOptions } from 'chart.js';
 import { PatientFields } from './types';
+import { trunc } from './utils';
 
 export const patientFields: PatientFields = {
   pregnancies: {
@@ -30,5 +32,33 @@ export const patientFields: PatientFields = {
   },
   age: {
     label: 'Age',
+  },
+};
+
+export const options: ChartOptions<'bar'> = {
+  indexAxis: 'y' as const,
+  elements: {
+    bar: {
+      borderWidth: 2,
+    },
+  },
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    title: {
+      display: true,
+      text: 'Explanation',
+    },
+    tooltip: {
+      callbacks: {
+        label: (ctx) => {
+          const values = ctx.dataset.data?.[ctx.dataIndex];
+          if (values && typeof (values) === 'object' && values.length === 2) {
+            const num = values[1] - values[0];
+            return `${num > 0 ? '+' : '-'}${trunc(Math.abs(num), 2).toString()}`;
+          }
+        }
+      }
+    }
   },
 };

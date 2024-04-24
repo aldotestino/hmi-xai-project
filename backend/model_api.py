@@ -1,8 +1,9 @@
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
+from typing import List
+import uuid
 from models.patient import Patient
 from shap_model import ShapModel
-from typing import List
 
 class ModelAPI(FastAPI):
     def __init__(self, model: ShapModel, allow_origins: List[str] = ["*"]):
@@ -32,6 +33,7 @@ class ModelAPI(FastAPI):
         prediction, shap_values = self.model.predict_with_shap(X)
         features = data.model_dump().keys()
         return {
+            "id": uuid.uuid4(),
             "prediction": prediction,
             "shapBaseValue": shap_values.base_values.tolist()[0],
             "shapValues": dict(zip(features, shap_values.values.tolist()[0])),

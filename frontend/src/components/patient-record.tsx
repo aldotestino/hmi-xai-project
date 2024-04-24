@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { PatientPrediction } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import { cn, trunc } from '@/lib/utils';
 
 interface PatientRecordProps {
   shapData: PatientPrediction['shapData'];
@@ -9,7 +9,7 @@ interface PatientRecordProps {
 
 function PatientRecord({ shapData, prediction }: PatientRecordProps) {
   return (
-    <div className='bg-white rounded-xl shadow-md border'>
+    <div className='bg-white w-full rounded-xl shadow-md border'>
       <Table>
         <TableHeader>
           <TableRow className='divide-x'>
@@ -24,7 +24,7 @@ function PatientRecord({ shapData, prediction }: PatientRecordProps) {
             {Object.values(shapData).map(value => (
               <TableCell className='max-w-20' key={value}>{value}</TableCell>
             ))}
-            <TableCell className={cn('max-w-20 font-semibold text-green-500', prediction > 50 && 'text-red-500')}>{prediction}%</TableCell>
+            <TableCell className={cn('max-w-20 font-semibold text-green-500', prediction > 50 && 'text-red-500')}>{trunc(prediction, 1)}%</TableCell>
           </TableRow>
         </TableBody>
       </Table>

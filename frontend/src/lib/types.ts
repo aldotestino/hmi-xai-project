@@ -1,4 +1,6 @@
 import * as z from 'zod';
+import { CoreChartOptions, ElementChartOptions, PluginChartOptions, DatasetChartOptions, ScaleChartOptions, BarControllerChartOptions, ChartTypeRegistry } from 'chart.js';
+import { _DeepPartialObject } from 'node_modules/chart.js/dist/types/utils';
 
 export const patientSchema = z.object({
   pregnancies: z.coerce.number().min(0),
@@ -14,6 +16,7 @@ export const patientSchema = z.object({
 export type Patient = z.infer<typeof patientSchema>;
 
 export type PatientPrediction = {
+  id: string;
   prediction: number;
   shapBaseValue: number;
   shapData: {
@@ -30,3 +33,11 @@ export type PatientFields = {
     description?: string;
   }
 }
+
+export type Shap = {
+  feature: string;
+  value: number;
+  shapValue: number;
+}
+
+export type typeChartOptions<TType extends keyof ChartTypeRegistry> = _DeepPartialObject<CoreChartOptions<TType> & ElementChartOptions<TType> & PluginChartOptions<TType> & DatasetChartOptions<TType> & ScaleChartOptions<TType> & BarControllerChartOptions>
