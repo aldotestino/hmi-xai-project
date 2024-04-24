@@ -1,17 +1,12 @@
 import { PatientPrediction } from '@/lib/types';
 import PatientRecord from './patient-record';
-import PredictionRisk from './prediction-risk';
+import Explanation from './explanation';
 
-function PredictionRow({ shapData, prediction }: PatientPrediction) {
+function PredictionRow({ shapData, prediction, shapValues, shapBaseValue }: PatientPrediction) {
   return (
-    <div className='flex flex-col gap-4 py-8'>
-      <PatientRecord {...shapData} />
-      <div className='flex flex-col lg:flex-row gap-4'>
-        <PredictionRisk risk={prediction} />
-        <div className='lg:flex-1 flex items-center justify-center h-72 bg-white border shadow-md rounded-xl'>
-          Explanation
-        </div>
-      </div>
+    <div className='space-y-4 py-4'>
+      <PatientRecord shapData={shapData} prediction={prediction} />
+      <Explanation shapBaseValue={shapBaseValue} shapValues={shapValues} shapData={shapData} />
     </div>
   );
 }

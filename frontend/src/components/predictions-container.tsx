@@ -1,6 +1,6 @@
 import { PatientPrediction } from '@/lib/types';
 import { Inbox } from 'lucide-react';
-import Prediction from './prediction-row';
+import PredictionRow from './prediction-row';
 
 interface PredictionsContainerProps {
   predictions: PatientPrediction[]
@@ -19,7 +19,7 @@ function PredictionsContainer({ predictions }: PredictionsContainerProps) {
   return (
     <main className='overflow-y-scroll px-4 lg:px-8 divide-y'>
       {predictions.map((prediction, index) => (
-        <Prediction key={index} {...prediction}/>
+        <PredictionRow key={index} {...prediction}/>
       ))}
     </main>
   );
