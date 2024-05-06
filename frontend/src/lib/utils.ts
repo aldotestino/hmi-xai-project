@@ -12,7 +12,11 @@ export function trunc(num: number, digits: number) {
   return Math.round(num * factor) / factor;
 }
 
-function createData(shapBaseValue: number, shaps: Shap[]) {
+function toProb(value: number) {
+  return Math.exp(value) / (1 + Math.exp(value));
+}
+
+function createDataArray(shapBaseValue: number, shaps: Shap[]) {
   const revShaps = [...shaps].reverse();
   const data: [number, number][] = [];
   data[0] = [shapBaseValue, shapBaseValue + revShaps[0].shapValue];
@@ -22,7 +26,8 @@ function createData(shapBaseValue: number, shaps: Shap[]) {
   }
 
   data.reverse();
-  return data;
+  const dataProbs = data.map(([start, end]) => [toProb(start), toProb(end)]) as [number, number][];
+  return dataProbs;
 }
 
 export function createDataset({ shapBaseValue, shapData, shapValues }: Pick<PatientPrediction, 'shapValues' | 'shapBaseValue' | 'shapData'>) {
@@ -34,7 +39,7 @@ export function createDataset({ shapBaseValue, shapData, shapValues }: Pick<Pati
   const backgroundColors = shaps.map(s => s.shapValue > 0 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)');
   const borderColors = shaps.map(s => s.shapValue > 0 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)');
 
-  const data = createData(shapBaseValue, shaps);
+  const data = createDataArray(shapBaseValue, shaps);
 
   const dataset: ChartData<'bar', [number, number][], string> = {
     labels,

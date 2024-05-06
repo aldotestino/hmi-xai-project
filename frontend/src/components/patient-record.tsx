@@ -24,7 +24,7 @@ function PatientRecord({ shapData, prediction }: PatientRecordProps) {
             {Object.values(shapData).map(value => (
               <TableCell className='max-w-20' key={value}>{value}</TableCell>
             ))}
-            <TableCell className={cn('max-w-20 font-semibold text-green-500', prediction > 50 && 'text-red-500')}>{trunc(prediction, 1)}%</TableCell>
+            <TableCell className={cn('max-w-20 font-semibold text-green-500', prediction > 50 && 'text-red-500')}>{trunc(prediction, 2)}%</TableCell>
           </TableRow>
         </TableBody>
       </Table>
