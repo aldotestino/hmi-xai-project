@@ -1,12 +1,24 @@
 import { PatientPrediction } from '@/lib/types';
 import PatientRecord from './patient-record';
-import Explanation from './explanation';
+import Shap from './shap';
+import { BarElement, CategoryScale, Chart as ChartJS, LinearScale, Title, Tooltip, PointElement } from 'chart.js';
+import Tsne from './tsne';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  PointElement
+);
 
 function PredictionRow({ shapData, prediction, shapValues, shapBaseValue }: PatientPrediction) {
   return (
-    <div className='space-y-4 w-full py-4 lg:py-6'>
+    <div className='space-y-4 w-full py-4 lg:py-6 overflow-x-hidden'>
       <PatientRecord shapData={shapData} prediction={prediction} />
-      <Explanation shapBaseValue={shapBaseValue} shapValues={shapValues} shapData={shapData} />
+      <Tsne />
+      <Shap shapBaseValue={shapBaseValue} shapValues={shapValues} shapData={shapData} />
     </div>
   );
 }

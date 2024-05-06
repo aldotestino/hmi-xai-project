@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { PatientPrediction, Shap } from './types';
 import { ChartData } from 'chart.js';
+import tsne_train_embeddings from './tsne_train_embeddings.json';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -16,7 +17,7 @@ function toProb(value: number) {
   return Math.exp(value) / (1 + Math.exp(value));
 }
 
-function createDataArray(shapBaseValue: number, shaps: Shap[]) {
+function createShapDataArray(shapBaseValue: number, shaps: Shap[]) {
   const revShaps = [...shaps].reverse();
   const data: [number, number][] = [];
   data[0] = [shapBaseValue, shapBaseValue + revShaps[0].shapValue];
@@ -30,7 +31,7 @@ function createDataArray(shapBaseValue: number, shaps: Shap[]) {
   return dataProbs;
 }
 
-export function createDataset({ shapBaseValue, shapData, shapValues }: Pick<PatientPrediction, 'shapValues' | 'shapBaseValue' | 'shapData'>) {
+export function createShapDataset({ shapBaseValue, shapData, shapValues }: Pick<PatientPrediction, 'shapValues' | 'shapBaseValue' | 'shapData'>) {
 
   const shaps = Object.entries(shapData).map(([key, value]) => ({ feature: key, value, shapValue: shapValues[key as keyof typeof shapValues] }));
   shaps.sort((a, b) => Math.abs(b.shapValue) - Math.abs(a.shapValue));
@@ -39,7 +40,7 @@ export function createDataset({ shapBaseValue, shapData, shapValues }: Pick<Pati
   const backgroundColors = shaps.map(s => s.shapValue > 0 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)');
   const borderColors = shaps.map(s => s.shapValue > 0 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)');
 
-  const data = createDataArray(shapBaseValue, shaps);
+  const data = createShapDataArray(shapBaseValue, shaps);
 
   const dataset: ChartData<'bar', [number, number][], string> = {
     labels,
@@ -49,6 +50,27 @@ export function createDataset({ shapBaseValue, shapData, shapValues }: Pick<Pati
         borderColor: borderColors,
         backgroundColor: backgroundColors,
         borderSkipped: false
+      }
+    ]
+  };
+
+  return dataset;
+}
+
+export function createTsneDataset() {
+
+  const data = tsne_train_embeddings.map(r => ({ x: r['Embedding 1'], y: r['Embedding 2'] }));
+
+  const backgroundColors = tsne_train_embeddings.map(r => r.Outcome === 0 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)');
+  const borderColors = tsne_train_embeddings.map(r => r.Outcome === 0 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)');
+
+  const dataset: ChartData<'scatter', { x: number, y: number }[], string> = {
+    datasets: [
+      {
+        data,
+        backgroundColor: backgroundColors,
+        borderColor: borderColors,
+        borderWidth: 1,
       }
     ]
   };

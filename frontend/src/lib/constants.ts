@@ -35,8 +35,8 @@ export const patientFields: PatientFields = {
   },
 };
 
-export const options: ChartOptions<'bar'> = {
-  indexAxis: 'y' as const,
+export const barOptions: ChartOptions<'bar'> = {
+  indexAxis: 'y' as const, // horizontal bar chart
   elements: {
     bar: {
       borderWidth: 2,
@@ -59,6 +59,37 @@ export const options: ChartOptions<'bar'> = {
           }
         }
       }
+    }
+  },
+};
+
+export const scatterOptions: ChartOptions<'scatter'> = {
+  elements: {
+    point: {
+      radius: 5,
+      hoverRadius: 7,
+    },
+  },
+  scales: {
+    y: {
+      title: {
+        display: true,
+        text: 'Embedding 2',
+      }
+    },
+    x: {
+      title: {
+        display: true,
+        text: 'Embedding 1',
+      }
+    }
+  },
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    title: {
+      display: true,
+      text: 'TSNE Embeddings',
     }
   },
 };
