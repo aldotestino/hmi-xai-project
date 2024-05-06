@@ -13,11 +13,11 @@ ChartJS.register(
   PointElement
 );
 
-function PredictionRow({ shapData, prediction, shapValues, shapBaseValue }: PatientPrediction) {
+function PredictionRow({ shapData, prediction, shapValues, shapBaseValue, embeddings }: PatientPrediction) {
   return (
     <div className='space-y-4 w-full py-4 lg:py-6 overflow-x-hidden'>
       <PatientRecord shapData={shapData} prediction={prediction} />
-      <Tsne />
+      <Tsne embeddings={embeddings} prediction={prediction} />
       <Shap shapBaseValue={shapBaseValue} shapValues={shapValues} shapData={shapData} />
     </div>
   );

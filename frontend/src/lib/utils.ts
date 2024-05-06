@@ -1,8 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { PatientPrediction, Shap } from './types';
+import { PatientEmbedding, PatientPrediction, Shap } from './types';
 import { ChartData } from 'chart.js';
-import tsne_train_embeddings from './tsne_train_embeddings.json';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -57,12 +56,21 @@ export function createShapDataset({ shapBaseValue, shapData, shapValues }: Pick<
   return dataset;
 }
 
-export function createTsneDataset() {
+export function createTsneDataset(embeddings: PatientEmbedding[]) {
 
-  const data = tsne_train_embeddings.map(r => ({ x: r['Embedding 1'], y: r['Embedding 2'] }));
+  const data = embeddings.map(r => ({ x: r.embedding1, y: r.embedding2 }));
 
-  const backgroundColors = tsne_train_embeddings.map(r => r.Outcome === 0 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)');
-  const borderColors = tsne_train_embeddings.map(r => r.Outcome === 0 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)');
+  const backgroundColors = embeddings.map(r => r.outcome === 0 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)') as string[];
+  const borderColors = embeddings.map(r => r.outcome === 0 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)') as string[];
+
+  backgroundColors[backgroundColors.length - 1] = embeddings.at(-1)!.outcome > 50 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)';
+  borderColors[borderColors.length - 1] = 'rgb(0, 0, 0)';
+
+  const pointStyles = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 'rect' : 'circle');
+  const pointRadiuses = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 12 : 5);
+  const pointHoverRadiuses = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 14 : 7);
+  const pointBorderWidths = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 4 : 1);
+  const pointHoverBorderWidths = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 4 : 1);
 
   const dataset: ChartData<'scatter', { x: number, y: number }[], string> = {
     datasets: [
@@ -70,7 +78,11 @@ export function createTsneDataset() {
         data,
         backgroundColor: backgroundColors,
         borderColor: borderColors,
-        borderWidth: 1,
+        pointStyle: pointStyles,
+        pointRadius: pointRadiuses,
+        pointHoverRadius: pointHoverRadiuses,
+        pointBorderWidth: pointBorderWidths,
+        pointHoverBorderWidth: pointHoverBorderWidths,
       }
     ]
   };

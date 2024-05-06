@@ -30,12 +30,16 @@ class ModelAPI(FastAPI):
 
     def predict(self, data: Patient):
         X = data.to_df()
+        
         prediction, shap_values = self.model.predict_with_shap(X)
         features = data.model_dump().keys()
+        embeddings = self.model.create_tsne_embeddings(X, prediction)
+        
         return {
             "id": uuid.uuid4(),
             "prediction": prediction,
             "shapBaseValue": shap_values.base_values.tolist()[0],
             "shapValues": dict(zip(features, shap_values.values.tolist()[0])),
             "shapData": dict(zip(features, X.values[0])),
+            "embeddings": embeddings
         }

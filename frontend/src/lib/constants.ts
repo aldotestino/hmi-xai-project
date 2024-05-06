@@ -64,12 +64,6 @@ export const barOptions: ChartOptions<'bar'> = {
 };
 
 export const scatterOptions: ChartOptions<'scatter'> = {
-  elements: {
-    point: {
-      radius: 5,
-      hoverRadius: 7,
-    },
-  },
   scales: {
     y: {
       title: {

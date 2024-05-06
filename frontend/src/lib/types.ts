@@ -15,16 +15,23 @@ export const patientSchema = z.object({
 
 export type Patient = z.infer<typeof patientSchema>;
 
+export type PatientEmbedding = {
+  embedding1: number;
+  embedding2: number;
+  outcome: number;
+}
+
 export type PatientPrediction = {
   id: string;
   prediction: number;
   shapBaseValue: number;
   shapData: {
     [key in keyof Patient]: number;
-  },
+  };
   shapValues: {
     [key in keyof Patient]: number;
-  }
+  };
+  embeddings: PatientEmbedding[]
 }
 
 export type PatientFields = {
