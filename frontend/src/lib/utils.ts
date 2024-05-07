@@ -60,8 +60,8 @@ export function createTsneDataset(embeddings: PatientEmbedding[]) {
 
   const data = embeddings.map(r => ({ x: r.embedding1, y: r.embedding2 }));
 
-  const backgroundColors = embeddings.map(r => r.outcome === 0 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)') as string[];
-  const borderColors = embeddings.map(r => r.outcome === 0 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)') as string[];
+  const backgroundColors = embeddings.map(r => r.outcome === 1 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)') as string[];
+  const borderColors = embeddings.map(r => r.outcome === 1 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)') as string[];
 
   backgroundColors[backgroundColors.length - 1] = embeddings.at(-1)!.outcome > 50 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)';
   borderColors[borderColors.length - 1] = 'rgb(0, 0, 0)';
