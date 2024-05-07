@@ -56,7 +56,7 @@ export function createShapDataset({ shapBaseValue, shapData, shapValues }: Pick<
   return dataset;
 }
 
-export function createTsneDataset(embeddings: PatientEmbedding[]) {
+export function createEmbeddingDataset(embeddings: PatientEmbedding[]) {
 
   const embeddingsCopy = embeddings.slice();
 

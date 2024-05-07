@@ -95,7 +95,7 @@ export const scatterOptions: ChartOptions<'scatter'> = {
     },
     title: {
       display: true,
-      text: 'TSNE Embeddings',
+      text: 'PCA Embeddings',
     }
   },
 };

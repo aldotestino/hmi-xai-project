@@ -33,8 +33,8 @@ class ModelAPI(FastAPI):
         
         prediction, shap_values = self.model.predict_with_shap(X)
         features = data.model_dump().keys()
-        embeddings = self.model.create_tsne_embeddings(X, prediction)
-        # embeddings = self.model.create_pca_embeddings(X, prediction)
+        #embeddings = self.model.create_tsne_embeddings(X, prediction)
+        embeddings = self.model.create_pca_embeddings(X, prediction)
         
         return {
             "id": uuid.uuid4(),

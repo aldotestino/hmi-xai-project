@@ -1,11 +1,11 @@
 import { scatterOptions } from '@/lib/constants';
 import { PatientEmbedding } from '@/lib/types';
-import { createTsneDataset } from '@/lib/utils';
+import { createEmbeddingDataset } from '@/lib/utils';
 import { Scatter } from 'react-chartjs-2';
 
-function Shap({ embeddings }: {embeddings: PatientEmbedding[]}) {
+function Embedddings({ embeddings }: {embeddings: PatientEmbedding[]}) {
 
-  const data = createTsneDataset(embeddings);
+  const data = createEmbeddingDataset(embeddings);
 
   return (
     <div className='p-4 flex justify-center bg-white border shadow-md rounded-xl'>
@@ -14,4 +14,4 @@ function Shap({ embeddings }: {embeddings: PatientEmbedding[]}) {
   );
 }
 
-export default Shap;
+export default Embedddings;
