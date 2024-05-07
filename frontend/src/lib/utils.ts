@@ -58,31 +58,35 @@ export function createShapDataset({ shapBaseValue, shapData, shapValues }: Pick<
 
 export function createTsneDataset(embeddings: PatientEmbedding[]) {
 
-  const data = embeddings.map(r => ({ x: r.embedding1, y: r.embedding2 }));
+  const embeddingsCopy = embeddings.slice();
 
-  const backgroundColors = embeddings.map(r => r.outcome === 1 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)') as string[];
-  const borderColors = embeddings.map(r => r.outcome === 1 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)') as string[];
-
-  backgroundColors[backgroundColors.length - 1] = embeddings.at(-1)!.outcome > 50 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)';
-  borderColors[borderColors.length - 1] = 'rgb(0, 0, 0)';
-
-  const pointStyles = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 'rect' : 'circle');
-  const pointRadiuses = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 12 : 5);
-  const pointHoverRadiuses = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 14 : 7);
-  const pointBorderWidths = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 4 : 1);
-  const pointHoverBorderWidths = Array.from({ length: embeddings.length }, (_, i) => i === embeddings.length - 1 ? 4 : 1);
+  const current = embeddingsCopy.pop()!;
+  const currentData = [{ x: current.embedding1, y: current.embedding2 }];
+  const noDiabetesData = embeddingsCopy.filter(r => r.outcome === 0).map(r => ({ x: r.embedding1, y: r.embedding2 }));
+  const hasDiabetesData = embeddingsCopy.filter(r => r.outcome === 1).map(r => ({ x: r.embedding1, y: r.embedding2 }));
 
   const dataset: ChartData<'scatter', { x: number, y: number }[], string> = {
     datasets: [
       {
-        data,
-        backgroundColor: backgroundColors,
-        borderColor: borderColors,
-        pointStyle: pointStyles,
-        pointRadius: pointRadiuses,
-        pointHoverRadius: pointHoverRadiuses,
-        pointBorderWidth: pointBorderWidths,
-        pointHoverBorderWidth: pointHoverBorderWidths,
+        label: 'Current Patient',
+        data: currentData,
+        pointStyle: 'rect',
+        borderColor: 'rgb(0, 0, 0)',
+        backgroundColor: current.outcome > 50 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)',
+        pointRadius: 12,
+        pointHoverRadius: 14,
+        pointBorderWidth: 4,
+        pointHoverBorderWidth: 4,
+      }, {
+        label: 'No Diabetes',
+        data: noDiabetesData,
+        borderColor: 'rgb(54, 162, 235)',
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+      }, {
+        label: 'Has Diabetes',
+        data: hasDiabetesData,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
       }
     ]
   };

@@ -49,6 +49,9 @@ export const barOptions: ChartOptions<'bar'> = {
       display: true,
       text: 'Explanation',
     },
+    legend: {
+      display: false,
+    },
     tooltip: {
       callbacks: {
         label: (ctx) => {
@@ -64,6 +67,12 @@ export const barOptions: ChartOptions<'bar'> = {
 };
 
 export const scatterOptions: ChartOptions<'scatter'> = {
+  elements: {
+    point: {
+      radius: 5,
+      hoverRadius: 7
+    }
+  },
   scales: {
     y: {
       title: {
@@ -81,6 +90,9 @@ export const scatterOptions: ChartOptions<'scatter'> = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
+    legend: {
+      display: true
+    },
     title: {
       display: true,
       text: 'TSNE Embeddings',
