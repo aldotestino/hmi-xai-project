@@ -8,11 +8,19 @@ import { PatientInput, patientInputSchema } from '@/lib/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { DialogClose } from '@radix-ui/react-dialog';
 
 function AddPatientDialog() {
 
   const form = useForm<PatientInput>({
-    resolver: zodResolver(patientInputSchema)
+    resolver: zodResolver(patientInputSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      sex: 'M',
+      birthDate: '',
+    }
   });
 
   function onSubmit(values: PatientInput) {
@@ -111,6 +119,9 @@ function AddPatientDialog() {
               />
             </div>
             <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="outline">Annulla</Button>
+              </DialogClose>
               <Button type="submit">Aggiungi</Button>
             </DialogFooter>
           </form>
