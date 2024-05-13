@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 import uuid
 from schema.patient import Patient
-from model import ShapModel
+from model import Model
 
 class Api(FastAPI):
-    def __init__(self, model: ShapModel, allow_origins: List[str] = ["*"]):
+    def __init__(self, model: Model, allow_origins: List[str] = ["*"]):
         super().__init__()
         self.model = model
         self.configure_middleware(allow_origins)

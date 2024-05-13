@@ -1,4 +1,5 @@
 import json
+import os
 from xgboost import XGBClassifier
 import pandas as pd
 import numpy as np
@@ -10,11 +11,16 @@ import joblib
 
 class Model:
   def __init__(self):
-    self.model: XGBClassifier = joblib.load("./data/model.joblib")
+
+    dirname = os.path.dirname(__file__)
+    model_path = os.path.join(dirname, './data/model.joblib')
+    train_df_path = os.path.join(dirname, './data/train.csv')
+
+    self.model: XGBClassifier = joblib.load(model_path)
     self.tsne = TSNE(n_components=2, random_state=42)
     self.scaler = StandardScaler()
     
-    train_df = pd.read_csv("./data/train.csv")
+    train_df = pd.read_csv(train_df_path)
     X_train = train_df.drop(columns=["Outcome"])
     self.X_train_scaled = self.scaler.fit_transform(X_train)
     self.y_train = train_df["Outcome"]
