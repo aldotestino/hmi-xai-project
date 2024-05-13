@@ -1,17 +1,8 @@
 version: '3'
 
 services:
-  frontend:
-    build: ./frontend
-    environment:
-      - VITE_BACKEND_URL=http://backend:8080
-    ports:
-      - '3000:3000'
-    depends_on:
-      - backend
-
-  backend:
-    build: ./backend
+  model-backend:
+    build: ./model-backend
     environment:
       - PORT=8080
     ports:
