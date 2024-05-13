@@ -43,7 +43,7 @@ export function PatientsDataTable<TData, TValue>({
         <AddPatientDialog />
       </div>
       <div className="rounded-md border">
-        <Table className='overflow-y-auto'>
+        <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
