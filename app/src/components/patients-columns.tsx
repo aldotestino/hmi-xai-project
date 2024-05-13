@@ -2,18 +2,12 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
-import { Button, buttonVariants } from './ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { MoreHorizontal, SquarePen, Trash2 } from 'lucide-react';
+import { PatientInput } from '@/lib/types';
 
-export type Patient = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  sex: string;
-  birthDate: string;
-};
+type Patient = PatientInput & { id: number };
 
 export const columns: ColumnDef<Patient>[] = [
   {

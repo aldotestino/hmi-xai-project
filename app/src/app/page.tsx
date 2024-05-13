@@ -1,5 +1,8 @@
-import { Patient, columns } from '@/components/columns';
-import { DataTable } from '@/components/data-table';
+import { columns } from '@/components/patients-columns';
+import { PatientsDataTable, } from '@/components/patients-data-table';
+import { PatientInput } from '@/lib/types';
+
+type Patient = PatientInput & { id: number };
 
 const patients: Patient[] = [
   {
@@ -90,7 +93,7 @@ export default function Home() {
       <header>
         <h1 className='text-4xl font-semibold'>Pazienti</h1>
       </header>
-      <DataTable columns={columns} data={patients} />
+      <PatientsDataTable columns={columns} data={patients} />
     </main>
   );
 }
