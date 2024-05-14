@@ -29,3 +29,9 @@ export async function updatePatient(id: number, patientInput: PatientInput) {
 
   revalidatePath('/');
 }
+
+export async function deletePatient(id: number) {
+  await db.delete(patient).where(eq(patient.id, id));
+
+  revalidatePath('/');
+}

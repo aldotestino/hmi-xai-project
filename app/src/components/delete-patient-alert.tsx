@@ -6,6 +6,7 @@ import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import Spinner from '@/components/ui/spinner';
+import { deletePatient } from '@/server/actions';
 
 function DeletePatientAlert({
   patientId
@@ -18,8 +19,7 @@ function DeletePatientAlert({
 
   async function onDelete() {
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 10000)); 
-    console.log(`Patient ${patientId} deleted`);
+    await deletePatient(patientId);
     setIsSubmitting(false);
     setOpen(false);
   }

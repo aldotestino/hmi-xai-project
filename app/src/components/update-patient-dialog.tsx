@@ -20,7 +20,8 @@ function UpdatePatientDialog({
   const [open, setOpen] = useState(false);
 
   async function onSubmit(values: PatientInput) {
-    await updatePatient(patientId, values).finally(() => setOpen(false));
+    await updatePatient(patientId, values);
+    setOpen(false);
   }
 
   return (
