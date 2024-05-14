@@ -109,7 +109,7 @@ function PatientForm({
             )}
           />
         </div>
-        <DialogFooter>
+        <DialogFooter className='gap-2'>
           <DialogClose asChild>
             <Button variant="outline">Annulla</Button>
           </DialogClose>
