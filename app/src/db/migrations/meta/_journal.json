@@ -29,6 +29,13 @@
       "when": 1715713658007,
       "tag": "0003_wise_quasimodo",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1715716419944,
+      "tag": "0004_curly_echo",
+      "breakpoints": true
     }
   ]
 }
