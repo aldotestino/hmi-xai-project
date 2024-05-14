@@ -2,7 +2,7 @@
 
 import db from '@/db';
 import { patient } from '@/db/schema';
-import { PatientInput, patientInputSchema } from '@/lib/types';
+import { PatientFeatures, PatientInput, patientFeaturesSchema, patientInputSchema } from '@/lib/types';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
@@ -34,4 +34,14 @@ export async function deletePatient(id: number) {
   await db.delete(patient).where(eq(patient.id, id));
 
   revalidatePath('/');
+}
+
+export async function addPatientPredictionWithExplanation(id: number, patientFeatures: PatientFeatures) {
+  const { success, data, error } = patientFeaturesSchema.safeParse(patientFeatures);
+
+  if (!success) {
+    throw new Error(JSON.stringify(error));
+  }
+
+  revalidatePath(`/patient/${id}`);
 }
