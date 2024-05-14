@@ -3,11 +3,39 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { DialogClose, DialogFooter } from '@/components/ui/dialog';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { Control, useForm } from 'react-hook-form';
 import { PatientInput, patientInputSchema } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import Spinner from '@/components/ui/spinner';
 import { DateInput } from './ui/date-input';
+
+function Field({
+  name,
+  label,
+  placeholder,
+  formControl
+}: {
+  name: keyof Pick<PatientInput, 'firstName' | 'lastName' | 'email'>,
+  label: string,
+  placeholder?: string,
+  formControl: Control<PatientInput>
+}) {
+  return (
+    <FormField
+      control={formControl}
+      name={name}
+      render={({ field }) => (
+        <FormItem className="w-full">
+          <FormLabel>{label}</FormLabel>
+          <FormControl>
+            <Input placeholder={placeholder} {...field} />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
 
 function PatientForm({
   submitButtonLabel = 'Aggiungi',
@@ -33,46 +61,10 @@ function PatientForm({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className='flex gap-4'>
-          <FormField
-            control={form.control}
-            name="firstName"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Nome</FormLabel>
-                <FormControl>
-                  <Input placeholder="Aldo" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Cognome</FormLabel>
-                <FormControl>
-                  <Input placeholder="Testino" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <Field name="firstName" label="Nome" formControl={form.control} />
+          <Field name="lastName" label="Cognome" formControl={form.control} />
         </div>
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="aldotestino@gmail.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Field name="email" label="Email" formControl={form.control} />
         <div className='flex gap-4'>
           <FormField
             control={form.control}
