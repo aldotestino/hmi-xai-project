@@ -14,7 +14,7 @@ export const columns: ColumnDef<Patient>[] = [
       const patient = row.original;
 
       return (
-        <Link href={`/patients/${patient.id}`} className={buttonVariants({ variant: 'link' })}>
+        <Link href={`/patient/${patient.id}`} className={buttonVariants({ variant: 'link' })}>
           {patient.id}
         </Link>
       );

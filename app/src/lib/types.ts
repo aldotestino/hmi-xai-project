@@ -8,4 +8,24 @@ export const patientInputSchema = z.object({
   birthDate: z.date()
 });
 
+export const patientFeaturesSchema = z.object({
+  pregnancies: z.coerce.number().min(0),
+  glucose: z.coerce.number().min(0),
+  bloodPressure: z.coerce.number().min(0),
+  skinThickness: z.coerce.number().min(0),
+  insulin: z.coerce.number().min(0),
+  bmi: z.coerce.number().min(0),
+  diabetesPedigreeFunction: z.coerce.number().min(0),
+  age: z.coerce.number().min(0),
+});
+
+
 export type PatientInput = z.infer<typeof patientInputSchema>;
+export type PatientFeatures = z.infer<typeof patientFeaturesSchema>;
+
+export type PatientFeatureFields = {
+  [key in keyof PatientFeatures]: {
+    label: string;
+    description?: string;
+  }
+}
