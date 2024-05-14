@@ -10,10 +10,13 @@ import Spinner from '@/components/ui/spinner';
 import { Input } from '@/components/ui/input';
 import { patientFeaturesFields } from '@/lib/constants';
 import { predictAndExplain } from '@/server/actions';
+import { Patient } from '@/db/schema/patient';
+import { getAge } from '@/lib/utils';
 
-function Field({ name, formControl }: {
+function Field({ name, formControl, sex }: {
   name: keyof PatientFeatures;
   formControl: Control<PatientFeatures>;
+  sex: string;
 }) {
   
   const { label, description } = patientFeaturesFields[name];
@@ -26,7 +29,7 @@ function Field({ name, formControl }: {
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input type="number" {...field} />
+            <Input type="number" disabled={name === 'pregnancies' && sex === 'M'} {...field} />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
@@ -37,27 +40,27 @@ function Field({ name, formControl }: {
 }
 
 function PatientFeaturesForm({ 
-  patientId 
+  patient 
 }: {
-  patientId: number;
+  patient: Patient;
 }) {
 
   const form = useForm<PatientFeatures>({
     resolver: zodResolver(patientFeaturesSchema),
     defaultValues: {
-      pregnancies: 6,
-      glucose: 103,
-      bloodPressure: 72,
-      skinThickness: 32,
-      insulin: 190,
-      bmi: 37.7,
-      diabetesPedigreeFunction: 0.324,
-      age: 55,
+      pregnancies: 0,
+      glucose: 0,
+      bloodPressure: 0,
+      skinThickness: 0,
+      insulin: 0,
+      bmi: 0,
+      diabetesPedigreeFunction: 0,
+      age: getAge(patient.birthDate),
     },
   });
 
   async function onSubmit(values: PatientFeatures) {
-    await predictAndExplain(patientId, values);
+    await predictAndExplain(patient.id, values);
   }
     
   return (
@@ -68,7 +71,7 @@ function PatientFeaturesForm({
 
         <div className='p-4 space-y-2 overflow-y-scroll'>
           {Object.keys(patientFeaturesSchema.shape).map(key => (
-            <Field key={key} name={key as keyof PatientFeatures} formControl={form.control} />
+            <Field key={key} name={key as keyof PatientFeatures} formControl={form.control} sex={patient.sex} />
           ))}
         </div>
         

@@ -46,10 +46,6 @@ export async function predictAndExplain(id: number, patientFeatures: PatientFeat
 
   const { data: predictionData }: { data: ModelApiResult } = await axios.post('http://localhost:8080/predict', patientFeatures);
 
-  console.log('PREDICTION FOR PATIENT:', id);
-  console.log(data);
-  console.log(predictionData);
-
   await db.insert(patientPrediction).values({
     patientId: id,
     pregnancies: data.pregnancies,

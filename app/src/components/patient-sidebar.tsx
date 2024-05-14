@@ -5,11 +5,12 @@ import { Separator } from '@/components/ui/separator';
 import { PatientFeatures } from '@/lib/types';
 import PatientFeaturesForm from '@/components/patient-features-form';
 import { cn } from '@/lib/utils';
+import { Patient } from '@/db/schema/patient';
 
 function PatientSidebar({
-  patientId
+  patient
 }: {
-  patientId: number
+  patient: Patient
 }) {
 
   return (
@@ -20,11 +21,11 @@ function PatientSidebar({
             <Link href="/" className={cn(buttonVariants({ variant: 'ghost' }), 'w-8 h-8 p-0')}> 
               <ArrowLeft className='w-4 h-4' />
             </Link>
-            <h1 className="text-xl font-semibold">Diabetes</h1>
+            <h1 className="text-xl font-semibold">{patient.firstName} {patient.lastName}</h1>
           </div>
           <Separator />
         </div>
-        <PatientFeaturesForm patientId={patientId} />
+        <PatientFeaturesForm patient={patient} />
       </div>
     </div>
   );

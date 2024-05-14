@@ -2,10 +2,37 @@
 
 import db from '@/db';
 import patient from '@/db/schema/patient';
-import { asc } from 'drizzle-orm';
+import { ModelApiResult } from '@/lib/types';
+import { asc, eq } from 'drizzle-orm';
 
 export async function getPatients() {
   return db.query.patient.findMany({
     orderBy: asc(patient.id)
   });
+}
+
+export async function getPatient(id: number) {
+  const p = await db.query.patient.findFirst({
+    where: eq(patient.id, id),
+    with: {
+      predictions: true
+    }
+  });
+
+  if (!p) {
+    throw new Error('Patient not found');
+  }
+
+  return {
+    ...p,
+    predictions: p.predictions.map(({ id, patientId, prediction, createdAt, embeddings, shapBaseValue, shapValues, ...data }) => ({
+      id,
+      prediction,
+      createdAt,
+      data,
+      shapBaseValue,
+      shapValues: shapValues as ModelApiResult['shapValues'],
+      embeddings: embeddings as ModelApiResult['embeddings'],
+    }))
+  };
 }

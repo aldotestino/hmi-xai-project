@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, serial, text, timestamp, varchar, } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 import patientPrediction from './patient-prediction';
 
 const patient = pgTable('patient', {
@@ -12,7 +12,7 @@ const patient = pgTable('patient', {
 });
 
 export const patientRelations = relations(patient, ({ many }) => ({
-  messages: many(patientPrediction)
+  predictions: many(patientPrediction)
 }));
 
 export default patient;
