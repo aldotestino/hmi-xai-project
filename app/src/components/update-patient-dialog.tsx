@@ -5,6 +5,8 @@ import { PatientInput } from '@/lib/types';
 import PatientForm from '@/components/patient-form';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { SquarePen } from 'lucide-react';
+import { updatePatient } from '@/server/actions';
+import { useState } from 'react';
 
 
 function UpdatePatientDialog({
@@ -15,13 +17,14 @@ function UpdatePatientDialog({
   defaultValues: PatientInput;
 }) {
 
+  const [open, setOpen] = useState(false);
+
   async function onSubmit(values: PatientInput) {
-    await new Promise(resolve => setTimeout(resolve, 10000));
-    console.log(values);
+    await updatePatient(patientId, values).finally(() => setOpen(false));
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <DropdownMenuItem onSelect={e => e.preventDefault()}>
           <SquarePen className="mr-2 h-4 w-4" />

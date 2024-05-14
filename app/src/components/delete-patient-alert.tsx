@@ -1,7 +1,11 @@
+'use client';
+
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, } from '@/components/ui/alert-dialog';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import Spinner from '@/components/ui/spinner';
 
 function DeletePatientAlert({
   patientId
@@ -9,12 +13,19 @@ function DeletePatientAlert({
   patientId: number;
 }) {
 
-  function onDelete() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  async function onDelete() {
+    setIsSubmitting(true);
+    await new Promise(resolve => setTimeout(resolve, 10000)); 
     console.log(`Patient ${patientId} deleted`);
+    setIsSubmitting(false);
+    setOpen(false);
   }
 
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <DropdownMenuItem onSelect={e => e.preventDefault()}>
           <Trash2 className="mr-2 h-4 w-4" />
@@ -30,8 +41,11 @@ function DeletePatientAlert({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Annulla</AlertDialogCancel>
-          <AlertDialogAction onClick={onDelete} className={buttonVariants({ variant: 'destructive' })}>Elimina</AlertDialogAction>
+          <AlertDialogCancel>Annulla</AlertDialogCancel>     
+          <Button onClick={onDelete} variant="destructive" disabled={isSubmitting}>
+            {isSubmitting && <Spinner className="mr-2" />}
+              Elimina
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -18,8 +18,6 @@ function PatientForm({
   defaultValues?: PatientInput;
   onSubmit: (values: PatientInput) => void;
 }) {
-
-  console.log(defaultValues);
   
   const form = useForm<PatientInput>({
     resolver: zodResolver(patientInputSchema),

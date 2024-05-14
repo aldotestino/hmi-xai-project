@@ -5,16 +5,19 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { PatientInput } from '@/lib/types';
 import PatientForm from './patient-form';
 import { addPatient } from '@/server/actions';
+import { useState } from 'react';
 
 
 function AddPatientDialog() {
 
+  const [open, setOpen] = useState(false);
+
   async function onSubmit(values: PatientInput) {
-    await addPatient(values);
+    await addPatient(values).finally(() => setOpen(false));
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>Aggiungi</Button>
       </DialogTrigger>
