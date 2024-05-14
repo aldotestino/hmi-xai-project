@@ -3,12 +3,8 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/button';
-
-import { PatientInput } from '@/lib/types';
 import PatientActions from './patient-actions';
-
-
-type Patient = PatientInput & { id: number };
+import { Patient } from '@/db/schema/patient';
 
 export const columns: ColumnDef<Patient>[] = [
   {
@@ -43,6 +39,11 @@ export const columns: ColumnDef<Patient>[] = [
   {
     accessorKey: 'birthDate',
     header: 'Data di nascita',
+    cell: ({ row }) => new Date(row.original.birthDate).toLocaleDateString('it-IT', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    }),
   },
   {
     id: 'actions',

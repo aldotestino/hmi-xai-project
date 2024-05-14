@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 
 interface DateInputProps {
   value?: Date
-  onChange: (date: Date) => void
+  onChange: (date: Date) => void,
 }
 
 interface DateParts {
@@ -12,6 +12,7 @@ interface DateParts {
 }
 
 const DateInput: React.FC<DateInputProps> = ({ value, onChange }) => {
+
   const [date, setDate] = React.useState<DateParts>(() => {
     const d = value ? new Date(value) : new Date()
     return {

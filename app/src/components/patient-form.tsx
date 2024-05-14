@@ -18,6 +18,8 @@ function PatientForm({
   defaultValues?: PatientInput;
   onSubmit: (values: PatientInput) => void;
 }) {
+
+  console.log(defaultValues);
   
   const form = useForm<PatientInput>({
     resolver: zodResolver(patientInputSchema),
@@ -102,7 +104,7 @@ function PatientForm({
               <FormItem className="w-full">
                 <FormLabel>Data di nascita</FormLabel>
                 <FormControl>
-                  <DateInput onChange={field.onChange} />
+                  <DateInput onChange={field.onChange} value={field.value} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
