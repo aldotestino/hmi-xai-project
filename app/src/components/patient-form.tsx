@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { PatientInput, patientInputSchema } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import Spinner from '@/components/ui/spinner';
+import { DateInput } from './ui/date-input';
 
 function PatientForm({
   submitButtonLabel = 'Aggiungi',
@@ -24,12 +25,9 @@ function PatientForm({
       firstName: '',
       lastName: '',
       email: '',
-      sex: 'M',
-      birthDate: '',
+      sex: 'M'
     }
   });
-
-  console.log(form.formState.isLoading);
 
   return (
     <Form {...form}>
@@ -104,7 +102,7 @@ function PatientForm({
               <FormItem className="w-full">
                 <FormLabel>Data di nascita</FormLabel>
                 <FormControl>
-                  <Input placeholder="30/01/2001" {...field} />
+                  <DateInput onChange={field.onChange} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

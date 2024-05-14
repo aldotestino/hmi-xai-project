@@ -9,7 +9,6 @@ import PatientForm from './patient-form';
 function AddPatientDialog() {
 
   async function onSubmit(values: PatientInput) {
-    await new Promise(resolve => setTimeout(resolve, 10000));
     console.log(values);
   }
 
