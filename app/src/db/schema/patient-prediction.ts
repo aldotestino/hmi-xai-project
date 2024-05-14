@@ -4,7 +4,7 @@ import { relations } from 'drizzle-orm';
 
 const patientPrediction = pgTable('patient_prediction', {
   id: serial('id').primaryKey(),
-  patientId: integer('patient_id').notNull().references(() => patient.id),
+  patientId: integer('patient_id').references(() => patient.id, { onDelete: 'cascade' }).notNull(),
   pregnancies: integer('pregnancies').notNull(),
   glucose: integer('glucose').notNull(),
   bloodPressure: integer('blood_pressure').notNull(),

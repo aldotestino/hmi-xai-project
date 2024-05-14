@@ -1,1 +1,0 @@
-ALTER TABLE "patientPrediction" RENAME TO "patient_prediction";

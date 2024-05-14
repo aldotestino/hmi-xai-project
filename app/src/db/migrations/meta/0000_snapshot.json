@@ -1,5 +1,5 @@
 {
-  "id": "34f6e531-0083-43ee-969e-cde445f82d51",
+  "id": "66c4f2b9-4828-4b4d-8109-eabfa7fcb2a2",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "6",
   "dialect": "postgresql",
@@ -18,31 +18,31 @@
           "name": "first_name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "last_name": {
           "name": "last_name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "email": {
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "sex": {
           "name": "sex",
-          "type": "varchar(1)",
+          "type": "char",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "birth_date": {
           "name": "birth_date",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -57,6 +57,121 @@
           ]
         }
       }
+    },
+    "public.patient_prediction": {
+      "name": "patient_prediction",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "patient_id": {
+          "name": "patient_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pregnancies": {
+          "name": "pregnancies",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "glucose": {
+          "name": "glucose",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "blood_pressure": {
+          "name": "blood_pressure",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "skin_thickness": {
+          "name": "skin_thickness",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "insulin": {
+          "name": "insulin",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bmi": {
+          "name": "bmi",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "diabetes_pedigree_function": {
+          "name": "diabetes_pedigree_function",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "age": {
+          "name": "age",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prediction": {
+          "name": "prediction",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shap_base_value": {
+          "name": "shap_base_value",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shap_values": {
+          "name": "shap_values",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "embeddings": {
+          "name": "embeddings",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "patient_prediction_patient_id_patient_id_fk": {
+          "name": "patient_prediction_patient_id_patient_id_fk",
+          "tableFrom": "patient_prediction",
+          "tableTo": "patient",
+          "columnsFrom": [
+            "patient_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     }
   },
   "enums": {},
