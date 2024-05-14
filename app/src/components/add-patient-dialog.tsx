@@ -6,6 +6,7 @@ import { PatientInput } from '@/lib/types';
 import PatientForm from './patient-form';
 import { addPatient } from '@/server/actions';
 import { useState } from 'react';
+import { Plus } from 'lucide-react';
 
 
 function AddPatientDialog() {
@@ -20,7 +21,10 @@ function AddPatientDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Aggiungi</Button>
+        <Button>
+          <Plus className='mr-2'/>
+          Aggiungi
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

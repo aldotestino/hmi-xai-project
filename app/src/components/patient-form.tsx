@@ -101,10 +101,7 @@ function PatientForm({
             )}
           />
         </div>
-        <DialogFooter className='gap-2'>
-          <DialogClose asChild>
-            <Button variant="outline">Annulla</Button>
-          </DialogClose>
+        <DialogFooter>
           <Button type="submit" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting && <Spinner className="mr-2" />}
             {submitButtonLabel}
