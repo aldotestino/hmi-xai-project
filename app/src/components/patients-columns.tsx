@@ -2,11 +2,11 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { MoreHorizontal, SquarePen, Trash2 } from 'lucide-react';
+import { buttonVariants } from '@/components/ui/button';
+
 import { PatientInput } from '@/lib/types';
-import UpdatePatientDialog from './update-patient-dialog';
+import PatientActions from './patient-actions';
+
 
 type Patient = PatientInput & { id: number };
 
@@ -46,27 +46,6 @@ export const columns: ColumnDef<Patient>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => {
-      const { id, ...defaultValues } = row.original;
- 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Apri menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Azioni</DropdownMenuLabel>
-            <UpdatePatientDialog patientId={id} defaultValues={defaultValues} />
-            <DropdownMenuItem>
-              <Trash2 className="mr-2 h-4 w-4" />
-              <span>Elimina</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: ({ row }) => <PatientActions patient={row.original} />,
   },
 ];
