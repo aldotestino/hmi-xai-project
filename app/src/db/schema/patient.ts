@@ -1,4 +1,6 @@
+import { relations } from 'drizzle-orm';
 import { pgTable, serial, text, timestamp, varchar, } from 'drizzle-orm/pg-core';
+import patientPrediction from './patient-prediction';
 
 const patient = pgTable('patient', {
   id: serial('id').primaryKey(),
@@ -9,6 +11,9 @@ const patient = pgTable('patient', {
   birthDate: timestamp('birth_date').notNull(),
 });
 
-export default patient;
+export const patientRelations = relations(patient, ({ many }) => ({
+  messages: many(patientPrediction)
+}));
 
+export default patient;
 export type Patient = typeof patient.$inferSelect;

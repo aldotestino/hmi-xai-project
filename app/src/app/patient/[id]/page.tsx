@@ -4,7 +4,7 @@ import React from 'react';
 async function PatientPage({ params }: {params: {id: number}}) {
   return (
     <div className='h-screen'>
-      <PatientSidebar />
+      <PatientSidebar patientId={params.id} />
     </div>
   );
 }

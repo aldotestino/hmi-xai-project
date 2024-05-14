@@ -9,6 +9,7 @@ import { PatientFeatures, patientFeaturesSchema } from '@/lib/types';
 import Spinner from '@/components/ui/spinner';
 import { Input } from '@/components/ui/input';
 import { patientFeaturesFields } from '@/lib/constants';
+import { predictAndExplain } from '@/server/actions';
 
 function Field({ name, formControl }: {
   name: keyof PatientFeatures;
@@ -35,7 +36,11 @@ function Field({ name, formControl }: {
   );
 }
 
-function PatientFeaturesForm() {
+function PatientFeaturesForm({ 
+  patientId 
+}: {
+  patientId: number;
+}) {
 
   const form = useForm<PatientFeatures>({
     resolver: zodResolver(patientFeaturesSchema),
@@ -51,9 +56,8 @@ function PatientFeaturesForm() {
     },
   });
 
-  async function onSubmit(data: PatientFeatures) {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log(data);
+  async function onSubmit(values: PatientFeatures) {
+    await predictAndExplain(patientId, values);
   }
     
   return (

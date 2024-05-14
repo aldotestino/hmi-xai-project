@@ -1,0 +1,184 @@
+{
+  "id": "346cc230-4a65-4e1b-a554-2c9696777869",
+  "prevId": "c1499426-0724-41cf-b887-72bb7237ad17",
+  "version": "6",
+  "dialect": "postgresql",
+  "tables": {
+    "public.patient": {
+      "name": "patient",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sex": {
+          "name": "sex",
+          "type": "varchar(1)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "birth_date": {
+          "name": "birth_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "patient_email_unique": {
+          "name": "patient_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    },
+    "public.patientPrediction": {
+      "name": "patientPrediction",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "patient_id": {
+          "name": "patient_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pregnancies": {
+          "name": "pregnancies",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "glucose": {
+          "name": "glucose",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "blood_pressure": {
+          "name": "blood_pressure",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "skin_thickness": {
+          "name": "skin_thickness",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "insulin": {
+          "name": "insulin",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bmi": {
+          "name": "bmi",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "diabetes_pedigree_function": {
+          "name": "diabetes_pedigree_function",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "age": {
+          "name": "age",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prediction": {
+          "name": "prediction",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shap_base_value": {
+          "name": "shap_base_value",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shap_values": {
+          "name": "shap_values",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "embeddings": {
+          "name": "embeddings",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "patientPrediction_patient_id_patient_id_fk": {
+          "name": "patientPrediction_patient_id_patient_id_fk",
+          "tableFrom": "patientPrediction",
+          "tableTo": "patient",
+          "columnsFrom": [
+            "patient_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

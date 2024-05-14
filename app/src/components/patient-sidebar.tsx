@@ -6,7 +6,11 @@ import { PatientFeatures } from '@/lib/types';
 import PatientFeaturesForm from '@/components/patient-features-form';
 import { cn } from '@/lib/utils';
 
-function PatientSidebar() {
+function PatientSidebar({
+  patientId
+}: {
+  patientId: number
+}) {
 
   return (
     <div className="h-full overflow-y-hidden flex items-center">
@@ -20,7 +24,7 @@ function PatientSidebar() {
           </div>
           <Separator />
         </div>
-        <PatientFeaturesForm />
+        <PatientFeaturesForm patientId={patientId} />
       </div>
     </div>
   );

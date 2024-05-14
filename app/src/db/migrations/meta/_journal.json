@@ -15,6 +15,20 @@
       "when": 1715705944216,
       "tag": "0001_grey_bloodaxe",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1715713134800,
+      "tag": "0002_lyrical_morlun",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1715713658007,
+      "tag": "0003_wise_quasimodo",
+      "breakpoints": true
     }
   ]
 }

@@ -1,8 +1,9 @@
 'use server';
 
 import db from '@/db';
-import { patient } from '@/db/schema';
-import { PatientFeatures, PatientInput, patientFeaturesSchema, patientInputSchema } from '@/lib/types';
+import axios from 'axios';
+import { patient, patientPrediction } from '@/db/schema';
+import { ModelApiResult, PatientFeatures, PatientInput, patientFeaturesSchema, patientInputSchema } from '@/lib/types';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
@@ -36,12 +37,34 @@ export async function deletePatient(id: number) {
   revalidatePath('/');
 }
 
-export async function addPatientPredictionWithExplanation(id: number, patientFeatures: PatientFeatures) {
+export async function predictAndExplain(id: number, patientFeatures: PatientFeatures) {
   const { success, data, error } = patientFeaturesSchema.safeParse(patientFeatures);
 
   if (!success) {
     throw new Error(JSON.stringify(error));
   }
+
+  const { data: predictionData }: { data: ModelApiResult } = await axios.post('http://localhost:8080/predict', patientFeatures);
+
+  console.log('PREDICTION FOR PATIENT:', id);
+  console.log(data);
+  console.log(predictionData);
+
+  await db.insert(patientPrediction).values({
+    patientId: id,
+    pregnancies: data.pregnancies,
+    glucose: data.glucose,
+    bloodPressure: data.bloodPressure,
+    skinThickness: data.skinThickness,
+    insulin: data.insulin,
+    bmi: data.bmi,
+    diabetesPedigreeFunction: data.diabetesPedigreeFunction,
+    age: data.age,
+    prediction: predictionData.prediction,
+    shapBaseValue: predictionData.shapBaseValue,
+    shapValues: predictionData.shapValues,
+    embeddings: predictionData.embeddings
+  });
 
   revalidatePath(`/patient/${id}`);
 }

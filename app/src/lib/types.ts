@@ -29,3 +29,15 @@ export type PatientFeatureFields = {
     description?: string;
   }
 }
+
+export type ModelApiResult = {
+  prediction: number;
+  shapBaseValue: number;
+  shapValues: {
+    [key in keyof PatientFeatures]: number;
+  };
+  embeddings: {
+    embedding1: number,
+    embedding2: number
+  }
+}
