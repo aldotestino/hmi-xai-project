@@ -16,7 +16,7 @@ import { getAge } from '@/lib/utils';
 function Field({ name, formControl, sex }: {
   name: keyof PatientFeatures;
   formControl: Control<PatientFeatures>;
-  sex: string;
+  sex: Patient['sex'];
 }) {
   
   const { label, description } = patientFeaturesFields[name];
