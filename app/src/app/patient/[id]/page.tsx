@@ -9,7 +9,7 @@ async function PatientPage({ params }: {params: {id: number}}) {
 
   return (
     <div className='h-screen grid grid-cols-[auto,1fr] overflow-y-hidden'>
-      <PatientSidebar patient={patient}  />
+      <PatientSidebar patient={patient} lastFeatueres={predictions[0]?.data}  />
       <PredictionsContainer predictions={predictions} />
     </div>
   );

@@ -40,14 +40,16 @@ function Field({ name, formControl, sex }: {
 }
 
 function PatientFeaturesForm({ 
-  patient 
+  patient,
+  defaultValues
 }: {
   patient: Patient;
+  defaultValues?: PatientFeatures;
 }) {
 
   const form = useForm<PatientFeatures>({
     resolver: zodResolver(patientFeaturesSchema),
-    defaultValues: {
+    defaultValues: defaultValues || {
       pregnancies: 0,
       glucose: 0,
       bloodPressure: 0,

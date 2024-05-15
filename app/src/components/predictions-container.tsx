@@ -18,7 +18,7 @@ function PredictionsContainer({
   }
 
   return (
-    <main className='overflow-y-scroll w-full px-4'>
+    <main className='overflow-y-scroll w-full px-4 py-2'>
       <Accordion type="multiple" className="w-full">
         {predictions.map((prediction) => (
           <Prediction key={prediction.id} prediction={prediction}/>

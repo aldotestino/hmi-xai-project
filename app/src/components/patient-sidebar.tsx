@@ -8,9 +8,11 @@ import { cn } from '@/lib/utils';
 import { Patient } from '@/db/schema/patient';
 
 function PatientSidebar({
-  patient
+  patient,
+  lastFeatueres
 }: {
-  patient: Patient
+  patient: Patient,
+  lastFeatueres?: PatientFeatures
 }) {
 
   return (
@@ -25,7 +27,7 @@ function PatientSidebar({
           </div>
           <Separator />
         </div>
-        <PatientFeaturesForm patient={patient} />
+        <PatientFeaturesForm patient={patient} defaultValues={lastFeatueres} />
       </div>
     </div>
   );
