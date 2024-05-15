@@ -1,6 +1,7 @@
 import { PatientPredictionWithData } from '@/lib/types';
 import { Inbox } from 'lucide-react';
 import Prediction from './prediction';
+import { Accordion } from '@/components/ui/accordion';
 
 function PredictionsContainer({ 
   predictions 
@@ -17,10 +18,12 @@ function PredictionsContainer({
   }
 
   return (
-    <main className='overflow-y-scroll w-full px-4 divide-y'>
-      {predictions.map((prediction) => (
-        <Prediction key={prediction.id} prediction={prediction}/>
-      ))}
+    <main className='overflow-y-scroll w-full px-4'>
+      <Accordion type="multiple" className="w-full">
+        {predictions.map((prediction) => (
+          <Prediction key={prediction.id} prediction={prediction}/>
+        ))}
+      </Accordion>
     </main>
   );
 }

@@ -1,9 +1,10 @@
 'use server';
 
 import db from '@/db';
+import { patientPrediction } from '@/db/schema';
 import patient from '@/db/schema/patient';
 import { ModelApiResult } from '@/lib/types';
-import { asc, eq } from 'drizzle-orm';
+import { asc, desc, eq } from 'drizzle-orm';
 
 export async function getPatients() {
   return db.query.patient.findMany({
@@ -15,8 +16,10 @@ export async function getPatient(id: number) {
   const p = await db.query.patient.findFirst({
     where: eq(patient.id, id),
     with: {
-      predictions: true
-    }
+      predictions: {
+        orderBy: desc(patientPrediction.createdAt),
+      },
+    },
   });
 
   if (!p) {

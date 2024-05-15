@@ -102,3 +102,68 @@ export function createEmbeddingDataset(embeddings: PatientPredictionWithData['em
 
   return dataset;
 }
+
+const dayNames = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+
+function isSameDay(date1: Date, date2: Date): boolean {
+  return (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  );
+}
+
+function isSameWeek(date1: Date, date2: Date): boolean {
+  const diff = date1.getTime() - date2.getTime();
+  const diffDays = diff / (1000 * 3600 * 24);
+  return diffDays < 7;
+}
+
+function isSameYear(date1: Date, date2: Date): boolean {
+  return date1.getFullYear() === date2.getFullYear();
+}
+
+function setupDateFormat(date: Date) {
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+
+  const options: Intl.DateTimeFormatOptions = {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false,
+  };
+
+  const time = date.toLocaleTimeString('it-IT', options);
+
+  return {
+    today,
+    yesterday,
+    time,
+  };
+}
+
+export function formatDate(date: Date): string {
+
+  const { today, yesterday, time } = setupDateFormat(date);
+
+  if (isSameDay(date, today)) {
+    return `Oggi alle ${time}`;
+  } else if (isSameDay(date, yesterday)) {
+    return `Ieri alle ${time}`;
+  } else if (isSameWeek(date, today)) {
+    return `${dayNames[date.getDay()]} at ${time}`;
+  } else {
+
+    const dayName = dayNames[date.getDay()];
+
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.getFullYear();
+
+    if (isSameYear(date, today))
+      return `${dayName} ${day} ${month} alle ${time}`;
+
+    return `${dayName} ${day} ${month} ${year} alle ${time}`;
+  }
+}
