@@ -64,3 +64,9 @@ export async function predictAndExplain(id: number, patientFeatures: PatientFeat
 
   revalidatePath(`/patient/${id}`);
 }
+
+export async function deletePrediction(id: number) {
+  await db.delete(patientPrediction).where(eq(patientPrediction.id, id));
+
+  revalidatePath('/');
+}

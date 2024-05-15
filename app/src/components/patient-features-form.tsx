@@ -71,7 +71,7 @@ function PatientFeaturesForm({
 
         <p className='px-4 pt-4 text-lg font-semibold text-muted-foreground'>Features</p>
 
-        <div className='p-4 space-y-2 overflow-y-scroll'>
+        <div className='p-4 space-y-4 overflow-y-scroll'>
           {Object.keys(patientFeaturesSchema.shape).map(key => (
             <Field key={key} name={key as keyof PatientFeatures} formControl={form.control} sex={patient.sex} />
           ))}

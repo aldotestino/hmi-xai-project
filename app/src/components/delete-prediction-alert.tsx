@@ -1,17 +1,16 @@
 'use client';
 
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import Spinner from '@/components/ui/spinner';
-import { deletePatient } from '@/server/actions';
+import { Trash2 } from 'lucide-react';
+import { deletePrediction } from '@/server/actions';
 
-function DeletePatientAlert({
-  patientId
+function DeletePredictionAlert({
+  predictionId
 }: {
-  patientId: number;
+  predictionId: number;
 }) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,7 +18,7 @@ function DeletePatientAlert({
 
   async function onDelete() {
     setIsSubmitting(true);
-    await deletePatient(patientId);
+    await deletePrediction(predictionId);
     setIsSubmitting(false);
     setOpen(false);
   }
@@ -27,17 +26,17 @@ function DeletePatientAlert({
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <DropdownMenuItem onSelect={e => e.preventDefault()}>
-          <Trash2 className="mr-2 h-4 w-4" />
-          <span>Elimina</span>
-        </DropdownMenuItem>
+        <Button variant="link" className='text-destructive'>
+          <Trash2 className="w-4 h-4 mr-2" />
+          Elimina
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Sei sicuro?</AlertDialogTitle>
           <AlertDialogDescription>
             Questa azione non può essere annullata. Questo eliminerà definitivamente 
-            il paziente {patientId} e rimuoverà i suoi dati dal server.
+            la predizione e rimuoverà i suoi dati dal server.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -52,4 +51,4 @@ function DeletePatientAlert({
   );
 }
 
-export default DeletePatientAlert;
+export default DeletePredictionAlert;
