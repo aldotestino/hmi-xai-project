@@ -6,6 +6,7 @@ import { patient, patientPrediction } from '@/db/schema';
 import { ModelApiResult, PatientFeatures, PatientInput, patientFeaturesSchema, patientInputSchema } from '@/lib/types';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
+import env from '@/lib/env';
 
 export async function addPatient(patientInput: PatientInput) {
   const { success, data, error } = patientInputSchema.safeParse(patientInput);
@@ -44,7 +45,7 @@ export async function predictAndExplain(id: number, patientFeatures: PatientFeat
     throw new Error(JSON.stringify(error));
   }
 
-  const { data: predictionData }: { data: ModelApiResult } = await axios.post('http://localhost:8080/predict', patientFeatures);
+  const { data: predictionData }: { data: ModelApiResult } = await axios.post(`${env.MODEL_API_URL}/predict`, patientFeatures);
 
   await db.insert(patientPrediction).values({
     patientId: id,
