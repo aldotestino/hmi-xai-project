@@ -1,17 +1,19 @@
 version: '3'
 
 services:
-  frontend:
-    build: ./frontend
+  patent-db:
+    image: postgres:16.2
     environment:
-      - VITE_BACKEND_URL=http://backend:8080
+      - POSTGRES_PASSWORD=patient-db-password
+      - POSTGRES_USER=patient-db
+      - POSTGRES_DB=patient-db
     ports:
-      - '3000:3000'
-    depends_on:
-      - backend
+      - 5432:5432
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
 
-  backend:
-    build: ./backend
+  model-api:
+    build: ./model-api
     environment:
       - PORT=8080
     ports:
