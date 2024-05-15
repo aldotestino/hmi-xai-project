@@ -7,11 +7,9 @@ function HomeLoading() {
       <header>
         <h1 className='text-4xl font-semibold'>Pazienti</h1>
       </header>
-      <div className='flex items-center justify-center'>
-        <div className='flex items-center gap-2 text-muted-foreground'>
-          <Spinner className='w-6 h-6' />
-          <p>Carico informazioni sui pazienti...</p>
-        </div>
+      <div className='flex items-center justify-center gap-2 text-muted-foreground'>
+        <Spinner className='w-6 h-6' />
+        <p>Carico informazioni sui pazienti...</p>
       </div>
     </main>
   );

@@ -41,3 +41,14 @@ export type ModelApiResult = {
     embedding2: number
   }
 }
+
+export type PatientPredictionWithData = ModelApiResult & {
+  id: number;
+  createdAt: Date,
+  data: PatientFeatures;
+}
+export type Shap = {
+  feature: string;
+  value: number;
+  shapValue: number;
+}
