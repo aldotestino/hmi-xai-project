@@ -3,34 +3,34 @@ import { trunc } from './utils';
 
 export const patientFeaturesFields: PatientFeatureFields = {
   pregnancies: {
-    label: 'Pregnancies',
-    description: 'Number of times pregnant',
+    label: 'Gravidanze',
+    description: 'Numero di gravidanze',
   },
   glucose: {
-    label: 'Glucose',
-    description: 'Plasma glucose concentration a 2 hours in an oral glucose tolerance test',
+    label: 'Glucosio',
+    description: 'Concentrazione di glucosio plasmatico a 2 ore in un test di tolleranza al glucosio orale',
   },
   bloodPressure: {
-    label: 'Blood Pressure',
-    description: 'Diastolic blood pressure (mm Hg)',
+    label: 'Pressione sanguigna',
+    description: 'Pressione arteriosa diastolica(mm Hg)',
   },
   skinThickness: {
-    label: 'Skin Thickness',
-    description: 'Triceps skin fold thickness (mm)',
+    label: 'Spessore della pelle',
+    description: 'Spessore della plica cutanea del tricipite (mm)',
   },
   insulin: {
-    label: 'Insulin',
-    description: '2-Hour serum insulin (mu U/ml)',
+    label: 'Insulina',
+    description: 'Insulina serica a 2 ore (mu U/ml)',
   },
   bmi: {
     label: 'BMI',
-    description: 'Body mass index (weight in kg/(height in m)^2)',
+    description: 'Body mass index (massa in kg/(altezza in m)^2)',
   },
   diabetesPedigreeFunction: {
     label: 'Diabetes Pedigree Function',
   },
   age: {
-    label: 'Age',
+    label: 'Età',
   },
 } as const;
 

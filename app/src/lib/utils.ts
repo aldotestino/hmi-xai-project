@@ -152,7 +152,7 @@ export function formatDate(date: Date): string {
   } else if (isSameDay(date, yesterday)) {
     return `Ieri alle ${time}`;
   } else if (isSameWeek(date, today)) {
-    return `${dayNames[date.getDay()]} at ${time}`;
+    return `${dayNames[date.getDay()]} alle ${time}`;
   } else {
 
     const dayName = dayNames[date.getDay()];
