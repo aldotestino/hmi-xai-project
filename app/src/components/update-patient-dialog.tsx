@@ -7,6 +7,7 @@ import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { SquarePen } from 'lucide-react';
 import { updatePatient } from '@/server/actions';
 import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
 
 
 function UpdatePatientDialog({
@@ -17,11 +18,19 @@ function UpdatePatientDialog({
   defaultValues: PatientInput;
 }) {
 
+  const { toast } = useToast();
   const [open, setOpen] = useState(false);
 
   async function onSubmit(values: PatientInput) {
-    await updatePatient(patientId, values);
-    setOpen(false);
+    await updatePatient(patientId, values).catch(() => {
+      toast({
+        title: 'Errore',
+        description: 'Si è verificato un errore, riprova più tardi.',
+        variant: 'destructive'
+      });
+    }).finally(() => {
+      setOpen(false);
+    });
   }
 
   return (

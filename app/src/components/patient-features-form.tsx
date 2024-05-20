@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from './ui/button';
-import { Separator } from './ui/separator';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Control, useForm } from 'react-hook-form';
@@ -12,6 +12,7 @@ import { patientFeaturesFields } from '@/lib/constants';
 import { predictAndExplain } from '@/server/actions';
 import { Patient } from '@/db/schema/patient';
 import { getAge } from '@/lib/utils';
+import { useToast } from '@/components/ui/use-toast';
 
 function Field({ name, formControl, sex }: {
   name: keyof PatientFeatures;
@@ -47,6 +48,8 @@ function PatientFeaturesForm({
   defaultValues?: PatientFeatures;
 }) {
 
+  const { toast } = useToast();
+
   const form = useForm<PatientFeatures>({
     resolver: zodResolver(patientFeaturesSchema),
     defaultValues: defaultValues || {
@@ -62,7 +65,14 @@ function PatientFeaturesForm({
   });
 
   async function onSubmit(values: PatientFeatures) {
-    await predictAndExplain(patient.id, values);
+    await predictAndExplain(patient.id, values)
+      .catch(() => {
+        toast({
+          title: 'Errore',
+          description: 'Si è verificato un errore, riprova più tardi.',
+          variant: 'destructive'
+        });
+      });
   }
     
   return (

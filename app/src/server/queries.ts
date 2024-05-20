@@ -5,6 +5,7 @@ import { patientPrediction } from '@/db/schema';
 import patient from '@/db/schema/patient';
 import { ModelApiResult } from '@/lib/types';
 import { asc, desc, eq } from 'drizzle-orm';
+import { notFound } from 'next/navigation';
 
 export async function getPatients() {
   return db.query.patient.findMany({
@@ -23,7 +24,7 @@ export async function getPatient(id: number) {
   });
 
   if (!p) {
-    throw new Error('Patient not found');
+    notFound();
   }
 
   return {

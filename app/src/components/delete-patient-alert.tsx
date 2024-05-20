@@ -7,6 +7,7 @@ import { Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import Spinner from '@/components/ui/spinner';
 import { deletePatient } from '@/server/actions';
+import { useToast } from './ui/use-toast';
 
 function DeletePatientAlert({
   patientId
@@ -14,14 +15,23 @@ function DeletePatientAlert({
   patientId: number;
 }) {
 
+  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [open, setOpen] = useState(false);
 
   async function onDelete() {
     setIsSubmitting(true);
-    await deletePatient(patientId);
-    setIsSubmitting(false);
-    setOpen(false);
+    await deletePatient(patientId)
+      .catch(() => {
+        toast({
+          title: 'Errore',
+          description: 'Si è verificato un errore, riprova più tardi.',
+          variant: 'destructive'
+        });
+      }).finally(() => {
+        setIsSubmitting(false);
+        setOpen(false);
+      });
   }
 
   return (

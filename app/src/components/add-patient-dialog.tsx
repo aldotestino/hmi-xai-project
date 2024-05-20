@@ -7,15 +7,25 @@ import PatientForm from './patient-form';
 import { addPatient } from '@/server/actions';
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
 
 
 function AddPatientDialog() {
 
+  const { toast } = useToast();
   const [open, setOpen] = useState(false);
 
   async function onSubmit(values: PatientInput) {
-    await addPatient(values);
-    setOpen(false);
+    await addPatient(values)
+      .catch(() => {
+        toast({
+          title: 'Errore',
+          description: 'Si è verificato un errore, riprova più tardi.',
+          variant: 'destructive'
+        });
+      }).finally(() => {
+        setOpen(false);
+      });
   }
 
   return (

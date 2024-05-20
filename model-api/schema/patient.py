@@ -3,10 +3,10 @@ import pandas as pd
 
 class Patient(BaseModel):
   pregnancies: int
-  glucose: int
-  bloodPressure: int
-  skinThickness: int
-  insulin: int
+  glucose: float
+  bloodPressure: float
+  skinThickness: float
+  insulin: float
   bmi: float
   diabetesPedigreeFunction: float
   age: int
