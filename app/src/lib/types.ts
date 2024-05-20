@@ -10,13 +10,13 @@ export const patientInputSchema = z.object({
 
 export const patientFeaturesSchema = z.object({
   pregnancies: z.coerce.number().min(0),
-  glucose: z.coerce.number().min(0),
-  bloodPressure: z.coerce.number().min(0),
-  skinThickness: z.coerce.number().min(0),
-  insulin: z.coerce.number().min(0),
-  bmi: z.coerce.number().min(0),
-  diabetesPedigreeFunction: z.coerce.number().min(0),
-  age: z.coerce.number().min(0),
+  glucose: z.coerce.number().min(44).max(197),
+  bloodPressure: z.coerce.number().min(44).max(104),
+  skinThickness: z.coerce.number().min(15).max(42),
+  insulin: z.coerce.number().min(71).max(205),
+  bmi: z.coerce.number().min(18).max(50),
+  diabetesPedigreeFunction: z.coerce.number().min(0).max(2),
+  age: z.coerce.number().min(0).max(120),
 });
 
 
