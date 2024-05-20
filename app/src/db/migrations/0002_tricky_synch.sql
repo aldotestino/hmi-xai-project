@@ -1,0 +1,1 @@
+ALTER TABLE "patient" ALTER COLUMN "birth_date" SET DATA TYPE varchar(10);

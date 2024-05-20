@@ -1,8 +1,9 @@
+import { parseDateString } from '@/lib/utils'
 import React, { useEffect, useRef } from 'react'
 
 interface DateInputProps {
-  value?: Date
-  onChange: (date: Date) => void,
+  value?: string
+  onChange: (date: string) => void,
 }
 
 interface DateParts {
@@ -14,7 +15,7 @@ interface DateParts {
 const DateInput: React.FC<DateInputProps> = ({ value, onChange }) => {
 
   const [date, setDate] = React.useState<DateParts>(() => {
-    const d = value ? new Date(value) : new Date()
+    const d = value ? parseDateString(value) : new Date();
     return {
       day: d.getDate(),
       month: d.getMonth() + 1, // JavaScript months are 0-indexed
@@ -27,7 +28,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, onChange }) => {
   const yearRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
-    const d = value ? new Date(value) : new Date()
+    const d = value ? parseDateString(value) : new Date()
     setDate({
       day: d.getDate(),
       month: d.getMonth() + 1,
@@ -63,7 +64,8 @@ const DateInput: React.FC<DateInputProps> = ({ value, onChange }) => {
 
       // only call onChange when the entry is valid
       if (isValid) {
-        onChange(new Date(newDate.year, newDate.month - 1, newDate.day))
+        // onChange(new Date(newDate.year, newDate.month - 1, newDate.day))
+        onChange(`${newDate.day}/${newDate.month}/${newDate.year}`)
       }
     }
 
@@ -139,7 +141,8 @@ const DateInput: React.FC<DateInputProps> = ({ value, onChange }) => {
         }
 
         setDate(newDate)
-        onChange(new Date(newDate.year, newDate.month - 1, newDate.day))
+        // onChange(new Date(newDate.year, newDate.month - 1, newDate.day))
+        onChange(`${newDate.day}/${newDate.month}/${newDate.year}`)
       } else if (e.key === 'ArrowDown') {
         e.preventDefault()
         let newDate = { ...date }
@@ -170,7 +173,8 @@ const DateInput: React.FC<DateInputProps> = ({ value, onChange }) => {
         }
 
         setDate(newDate)
-        onChange(new Date(newDate.year, newDate.month - 1, newDate.day))
+        // onChange(new Date(newDate.year, newDate.month - 1, newDate.day))
+        onChange(`${newDate.day}/${newDate.month}/${newDate.year}`)
       }
 
       if (e.key === 'ArrowRight') {

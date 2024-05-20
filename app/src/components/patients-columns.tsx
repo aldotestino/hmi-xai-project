@@ -38,12 +38,7 @@ export const columns: ColumnDef<Patient>[] = [
   },
   {
     accessorKey: 'birthDate',
-    header: 'Data di nascita',
-    cell: ({ row }) => new Date(row.original.birthDate).toLocaleDateString('it-IT', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    }),
+    header: 'Data di nascita'
   },
   {
     id: 'actions',

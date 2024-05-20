@@ -1,13 +1,13 @@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { DialogClose, DialogFooter } from '@/components/ui/dialog';
+import { DialogFooter } from '@/components/ui/dialog';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Control, useForm } from 'react-hook-form';
 import { PatientInput, patientInputSchema } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import Spinner from '@/components/ui/spinner';
-import { DateInput } from './ui/date-input';
+import { DateInput } from '@/components/ui/date-input';
 
 function Field({
   name,

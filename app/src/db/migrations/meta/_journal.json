@@ -15,6 +15,13 @@
       "when": 1716228793050,
       "tag": "0001_redundant_sage",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1716238320423,
+      "tag": "0002_tricky_synch",
+      "breakpoints": true
     }
   ]
 }

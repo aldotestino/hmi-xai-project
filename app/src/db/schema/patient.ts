@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, serial, text, timestamp, char } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, varchar, char } from 'drizzle-orm/pg-core';
 import patientPrediction from './patient-prediction';
 
 const patient = pgTable('patient', {
@@ -8,7 +8,7 @@ const patient = pgTable('patient', {
   lastName: text('last_name').notNull(),
   email: text('email').unique().notNull(),
   sex: char('sex', { enum: ['M', 'F'] }).notNull(),
-  birthDate: timestamp('birth_date').notNull(),
+  birthDate: varchar('birth_date', { length: 10 }).notNull(),
 });
 
 export const patientRelations = relations(patient, ({ many }) => ({

@@ -8,7 +8,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function getAge(birthDate: Date): number {
+export function parseDateString(value: string) {
+  const [day, month, year] = value.split('/').map(Number);
+  return new Date(year, month - 1, day);
+};
+
+export function getAge(birthDateString: string): number {
+
+  const birthDate = parseDateString(birthDateString);
   const today: Date = new Date();
 
   const ageDiffMillis: number = today.getTime() - birthDate.getTime();
