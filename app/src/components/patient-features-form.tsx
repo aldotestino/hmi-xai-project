@@ -11,8 +11,10 @@ import { Input } from '@/components/ui/input';
 import { patientFeaturesFields } from '@/lib/constants';
 import { predictAndExplain } from '@/server/actions';
 import { Patient } from '@/db/schema/patient';
-import { getAge } from '@/lib/utils';
+import { cn, getAge } from '@/lib/utils';
 import { useToast } from '@/components/ui/use-toast';
+import { useMemo, useState } from 'react';
+import { Search } from 'lucide-react';
 
 function Field({ name, formControl, sex }: {
   name: keyof PatientFeatures;
@@ -74,17 +76,39 @@ function PatientFeaturesForm({
         });
       });
   }
+
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const featureFields = useMemo(() => Object.keys(patientFeaturesSchema.shape)
+    .filter(key => patientFeaturesFields[key as keyof PatientFeatures].label.includes(searchTerm)), [searchTerm]);
     
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='grid grid-rows-[auto,1fr,auto] overflow-y-hidden'>
 
-        <p className='px-4 pt-4 text-lg font-semibold text-muted-foreground'>Features</p>
+        <div className='flex items-center w-full'>
+          <div className='relative h-full flex-1 flex items-center mr-6 p-4 pr-0'>
+            <p className='text-lg font-semibold text-muted-foreground'>Parametri</p>
+            <Input
+              className={cn('absolute transition-transform duration-300', isSearching ? 'translate-x-0' : 'translate-x-72')}
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              placeholder='Cerca parametro...'
+            />
+          </div>
+          <div className='z-10 bg-white p-4 pl-0'>
+            <Button variant="ghost" type='button' onClick={() => setIsSearching(!isSearching)}>
+              <Search className='h-4 w-4' />
+            </Button>
+          </div>
+        </div>
 
         <div className='p-4 space-y-4 overflow-y-scroll'>
-          {Object.keys(patientFeaturesSchema.shape).map(key => (
+          {featureFields.map(key => (
             <Field key={key} name={key as keyof PatientFeatures} formControl={form.control} sex={patient.sex} />
           ))}
+          {featureFields.length === 0 && <p className='text-muted-foreground'>Nessun parametro trovato.</p>}
         </div>
         
         <div>
