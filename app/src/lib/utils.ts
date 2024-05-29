@@ -1,8 +1,9 @@
 import { ChartData } from 'chart.js';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { PatientPredictionWithData, Shap } from './types';
+import { PatientFeatures, PatientPredictionWithData, Shap } from './types';
 import trainEmbeddings from './train_embeddings.json';
+import { patientFeaturesFields } from './constants';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -54,7 +55,7 @@ export function createShapDataset({ shapBaseValue, data, shapValues }: Pick<Pati
   const shaps = Object.entries(data).map(([key, value]) => ({ feature: key, value, shapValue: shapValues[key as keyof typeof shapValues] }));
   shaps.sort((a, b) => Math.abs(b.shapValue) - Math.abs(a.shapValue));
 
-  const labels = shaps.map(s => `${s.value}=${s.feature}`);
+  const labels = shaps.map(s => `${patientFeaturesFields[s.feature as keyof PatientFeatures].label} = ${s.value}`);
   const backgroundColors = shaps.map(s => s.shapValue > 0 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)');
   const borderColors = shaps.map(s => s.shapValue > 0 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)');
 
