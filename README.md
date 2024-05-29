@@ -23,7 +23,7 @@ The app will be available at: http://localhost:3000
 ## PCA Embeddings
 ![PCA Embeddings    ](/images/pca.jpeg?raw=true "PCA Embeddings")
 
-## Sgap Values
+## Shap Values
 ![Shap Values](/images/shap.jpeg?raw=true "Shap Values")
 
 
