@@ -10,7 +10,7 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: 'Predict Diabetes',
+  title: 'GlycoGuard',
   description: 'A platform to predict diabetes using machine learning',
 };
 

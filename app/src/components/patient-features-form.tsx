@@ -98,7 +98,7 @@ function PatientFeaturesForm({
                 placeholder='Filter feature...'
               />
             </div>
-            <div className='z-10 bg-white p-4 pl-0'>
+            <div className='z-10 bg-background p-4 pl-0'>
               <Button variant="ghost" type='button' onClick={() => setIsSearching(!isSearching)}>
                 <Search className='h-4 w-4' />
               </Button>

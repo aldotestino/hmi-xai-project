@@ -16,10 +16,10 @@ function PatientSidebar({
 }) {
 
   return (
-    <div className='bg-white w-80 h-full border-r grid grid-rows-[auto,1fr] overflow-y-hidden'>
+    <div className='w-80 h-full border-r grid grid-rows-[auto,1fr] overflow-y-hidden'>
       <div>
         <div className='flex items-center gap-2 p-4'>
-          <Link href="/" className={cn(buttonVariants({ variant: 'ghost' }), 'w-8 h-8 p-0')}> 
+          <Link href="/dashboard" className={cn(buttonVariants({ variant: 'ghost' }), 'w-8 h-8 p-0')}> 
             <ArrowLeft className='w-4 h-4' />
           </Link>
           <h1 className="text-xl font-semibold">{patient.firstName} {patient.lastName}</h1>
