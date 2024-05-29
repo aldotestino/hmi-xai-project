@@ -121,7 +121,7 @@ function isSameDay(date1: Date, date2: Date): boolean {
 }
 
 function isSameWeek(date1: Date, date2: Date): boolean {
-  const diff = date1.getTime() - date2.getTime();
+  const diff = date2.getTime() - date1.getTime();
   const diffDays = diff / (1000 * 3600 * 24);
   return diffDays < 7;
 }
@@ -139,6 +139,7 @@ function setupDateFormat(date: Date) {
     hour: 'numeric',
     minute: 'numeric',
     hour12: false,
+    timeZone: 'Europe/Rome',
   };
 
   const time = date.toLocaleTimeString('it-IT', options);
