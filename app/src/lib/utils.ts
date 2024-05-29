@@ -33,7 +33,7 @@ export function trunc(num: number, digits: number) {
 }
 
 function toProb(value: number) {
-  return Math.exp(value) / (1 + Math.exp(value));
+  return Math.exp(value) / (1 + Math.exp(value)) * 100;
 }
 
 function createShapDataArray(shapBaseValue: number, shaps: Shap[]) {

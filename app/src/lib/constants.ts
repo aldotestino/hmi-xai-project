@@ -41,6 +41,14 @@ export const barOptions = {
       borderWidth: 2,
     },
   },
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: 'Risk probability [%]',
+      }
+    }
+  },
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -57,7 +65,7 @@ export const barOptions = {
           const values = ctx.dataset.data?.[ctx.dataIndex];
           if (values && typeof (values) === 'object' && values.length === 2) {
             const num = values[1] - values[0];
-            return `${num > 0 ? '+' : '-'}${trunc(Math.abs(num), 2).toString()}`;
+            return `${num > 0 ? '+' : '-'}${trunc(Math.abs(num), 2).toString()}%`;
           }
         }
       }
