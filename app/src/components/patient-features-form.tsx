@@ -81,7 +81,7 @@ function PatientFeaturesForm({
   const [searchTerm, setSearchTerm] = useState('');
 
   const featureFields = useMemo(() => Object.keys(patientFeaturesSchema.shape)
-    .filter(key => patientFeaturesFields[key as keyof PatientFeatures].label.includes(searchTerm)), [searchTerm]);
+    .filter(key => patientFeaturesFields[key as keyof PatientFeatures].label.toLowerCase().includes(searchTerm.toLowerCase())), [searchTerm]);
     
   return (
     <Form {...form}>
