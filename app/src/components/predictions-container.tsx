@@ -10,9 +10,9 @@ function PredictionsContainer({
 }) {
   if(predictions.length === 0) {
     return (
-      <main className="flex items-center justify-center flex-col text-muted-foreground">
+      <main className="flex items-center justify-center flex-col text-muted-foreground gap-2">
         <Inbox size={50} />
-        <p className='text-lg font-semibold text-center'>Compila il form per iniziare...</p>
+        <p className='font-semibold text-center'>Fill out the form to get started...</p>
       </main>
     );
   }
