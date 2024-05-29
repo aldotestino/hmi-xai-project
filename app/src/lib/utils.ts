@@ -110,7 +110,7 @@ export function createEmbeddingDataset(embeddings: PatientPredictionWithData['em
   return dataset;
 }
 
-const dayNames = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function isSameDay(date1: Date, date2: Date): boolean {
   return (
@@ -156,11 +156,11 @@ export function formatDate(date: Date): string {
   const { today, yesterday, time } = setupDateFormat(date);
 
   if (isSameDay(date, today)) {
-    return `Oggi alle ${time}`;
+    return `Today at ${time}`;
   } else if (isSameDay(date, yesterday)) {
-    return `Ieri alle ${time}`;
+    return `Yesterday at ${time}`;
   } else if (isSameWeek(date, today)) {
-    return `${dayNames[date.getDay()]} alle ${time}`;
+    return `${dayNames[date.getDay()]} at ${time}`;
   } else {
 
     const dayName = dayNames[date.getDay()];
@@ -170,8 +170,8 @@ export function formatDate(date: Date): string {
     const year = date.getFullYear();
 
     if (isSameYear(date, today))
-      return `${dayName} ${day} ${month} alle ${time}`;
+      return `${dayName} ${day} ${month} at ${time}`;
 
-    return `${dayName} ${day} ${month} ${year} alle ${time}`;
+    return `${dayName} ${day} ${month} ${year} at ${time}`;
   }
 }

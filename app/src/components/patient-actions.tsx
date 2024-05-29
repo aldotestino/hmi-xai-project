@@ -17,12 +17,12 @@ function PatientActions({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-8 w-8 p-0">
-          <span className="sr-only">Apri menu</span>
+          <span className="sr-only">Open the menu</span>
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Azioni</DropdownMenuLabel>
+        <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <UpdatePatientDialog patientId={id} defaultValues={defaultValues} />
         <DeletePatientAlert patientId={id} />
       </DropdownMenuContent>

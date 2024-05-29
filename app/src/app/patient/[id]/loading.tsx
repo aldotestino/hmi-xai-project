@@ -5,7 +5,7 @@ function PatientPageLoading() {
   return (
     <div className='h-screen flex items-center justify-center gap-2 text-muted-foreground'>
       <Spinner className='w-6 h-6' />
-      <p>Carico informazioni sul paziente...</p>
+      <p>Loading patient information...</p>
     </div>
   );
 }

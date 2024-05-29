@@ -85,16 +85,16 @@ function PatientFeaturesForm({
     
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='grid grid-rows-[auto,1fr,auto] overflow-y-hidden'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='grid grid-rows-[auto,1fr,auto] overflow-y-hidden overflow-x-hidden'>
 
         <div className='flex items-center w-full'>
           <div className='relative h-full flex-1 flex items-center mr-6 p-4 pr-0'>
-            <p className='text-lg font-semibold text-muted-foreground'>Parametri</p>
+            <p className='text-lg font-semibold text-muted-foreground'>Features</p>
             <Input
               className={cn('absolute transition-transform duration-300', isSearching ? 'translate-x-0' : 'translate-x-72')}
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              placeholder='Cerca parametro...'
+              placeholder='Filter feature...'
             />
           </div>
           <div className='z-10 bg-white p-4 pl-0'>

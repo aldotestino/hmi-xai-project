@@ -33,14 +33,14 @@ function AddPatientDialog() {
       <DialogTrigger asChild>
         <Button>
           <Plus className='h-4 w-4 mr-2'/>
-          Aggiungi
+          Add
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Aggiungi paziente</DialogTitle>
+          <DialogTitle>Add patient</DialogTitle>
           <DialogDescription>
-            Aggiungi un nuovo paziente.
+            Add a new patient.
           </DialogDescription>
         </DialogHeader>
         <PatientForm onSubmit={onSubmit} />

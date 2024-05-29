@@ -19,7 +19,7 @@ function PatientFeaturesTable({
             {Object.keys(data).map(key => (
               <TableHead key={key}>{patientFeaturesFields[key as keyof PatientFeatureFields].label}</TableHead>
             ))}
-            <TableHead>Rischio</TableHead>
+            <TableHead>Risk</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

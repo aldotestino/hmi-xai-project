@@ -22,11 +22,11 @@ export const columns: ColumnDef<Patient>[] = [
   },
   {
     accessorKey: 'firstName',
-    header: 'Nome',
+    header: 'First Name',
   },
   {
     accessorKey: 'lastName',
-    header: 'Cognome',
+    header: 'Last Name',
   },
   {
     accessorKey: 'email',
@@ -34,11 +34,11 @@ export const columns: ColumnDef<Patient>[] = [
   },
   {
     accessorKey: 'sex',
-    header: 'Sesso',
+    header: 'Sex',
   },
   {
     accessorKey: 'birthDate',
-    header: 'Data di nascita'
+    header: 'Birth Date',
   },
   {
     id: 'actions',

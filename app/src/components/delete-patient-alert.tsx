@@ -39,22 +39,21 @@ function DeletePatientAlert({
       <AlertDialogTrigger asChild>
         <DropdownMenuItem onSelect={e => e.preventDefault()}>
           <Trash2 className="mr-2 h-4 w-4" />
-          <span>Elimina</span>
+          <span>Delete</span>
         </DropdownMenuItem>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Sei sicuro?</AlertDialogTitle>
+          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            Questa azione non può essere annullata. Questo eliminerà definitivamente 
-            il paziente {patientId} e rimuoverà i suoi dati dal server.
+            This action cannot be undone. This will permanently delete the patient {patientId} and remove his data from the server.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Annulla</AlertDialogCancel>     
+          <AlertDialogCancel>Cancel</AlertDialogCancel>     
           <Button onClick={onDelete} variant="destructive" disabled={isSubmitting}>
             {isSubmitting && <Spinner className="mr-2" />}
-              Elimina
+              Continue
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

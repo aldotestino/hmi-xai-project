@@ -38,17 +38,17 @@ function UpdatePatientDialog({
       <DialogTrigger asChild>
         <DropdownMenuItem onSelect={e => e.preventDefault()}>
           <SquarePen className="mr-2 h-4 w-4" />
-          <span>Aggiorna</span>
+          <span>Update</span>
         </DropdownMenuItem>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Aggiorna paziente</DialogTitle>
+          <DialogTitle>Update patient</DialogTitle>
           <DialogDescription>
-            Stai aggiornando i dati del paziente {patientId}.
+            You are updating patient {patientId}.
           </DialogDescription>
         </DialogHeader>
-        <PatientForm onSubmit={onSubmit} defaultValues={defaultValues} submitButtonLabel="Aggiorna" />
+        <PatientForm onSubmit={onSubmit} defaultValues={defaultValues} submitButtonLabel="Update" />
       </DialogContent>
     </Dialog>
   );

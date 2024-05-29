@@ -38,7 +38,7 @@ function Field({
 }
 
 function PatientForm({
-  submitButtonLabel = 'Aggiungi',
+  submitButtonLabel = 'Add',
   defaultValues,
   onSubmit
 }: {
@@ -61,8 +61,8 @@ function PatientForm({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className='flex gap-4'>
-          <Field name="firstName" label="Nome" formControl={form.control} />
-          <Field name="lastName" label="Cognome" formControl={form.control} />
+          <Field name="firstName" label="First name" formControl={form.control} />
+          <Field name="lastName" label="Last name" formControl={form.control} />
         </div>
         <Field name="email" label="Email" formControl={form.control} />
         <div className='flex gap-4'>
@@ -71,7 +71,7 @@ function PatientForm({
             name="sex"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Sesso</FormLabel>
+                <FormLabel>Sex</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
@@ -92,7 +92,7 @@ function PatientForm({
             name="birthDate"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Data di nascita</FormLabel>
+                <FormLabel>Birth Date</FormLabel>
                 <FormControl>
                   <DateInput onChange={field.onChange} value={field.value} />
                 </FormControl>

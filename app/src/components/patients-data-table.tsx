@@ -36,7 +36,7 @@ export function PatientsDataTable<TData, TValue>({
         <div className='flex items-center relative max-w-sm w-full'>
           <Search className="w-4 h-4 absolute left-2 text-muted-foreground" />
           <Input
-            placeholder="Filtra per email..."
+            placeholder="Filter by email..."
             value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
             onChange={(event) =>
               table.getColumn('email')?.setFilterValue(event.target.value)
