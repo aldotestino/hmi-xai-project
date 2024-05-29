@@ -87,22 +87,26 @@ function PatientFeaturesForm({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='grid grid-rows-[auto,1fr,auto] overflow-y-hidden overflow-x-hidden'>
 
-        <div className='flex items-center w-full'>
-          <div className='relative h-full flex-1 flex items-center mr-6 p-4 pr-0'>
-            <p className='text-lg font-semibold text-muted-foreground'>Features</p>
-            <Input
-              className={cn('absolute transition-transform duration-300', isSearching ? 'translate-x-0' : 'translate-x-72')}
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-              placeholder='Filter feature...'
-            />
+        <div>
+          <div className='flex items-center w-full'>
+            <div className='relative h-full flex-1 flex items-center mr-6 p-4 pr-0'>
+              <p className='text-lg font-semibold text-muted-foreground'>Features</p>
+              <Input
+                className={cn('absolute transition-transform duration-300', isSearching ? 'translate-x-0' : 'translate-x-60')}
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                placeholder='Filter feature...'
+              />
+            </div>
+            <div className='z-10 bg-white p-4 pl-0'>
+              <Button variant="ghost" type='button' onClick={() => setIsSearching(!isSearching)}>
+                <Search className='h-4 w-4' />
+              </Button>
+            </div>
           </div>
-          <div className='z-10 bg-white p-4 pl-0'>
-            <Button variant="ghost" type='button' onClick={() => setIsSearching(!isSearching)}>
-              <Search className='h-4 w-4' />
-            </Button>
-          </div>
+          <FormDescription className='p-4 pt-0'>Modify the features and click on &quot;Predict&quot; to start a new simulation</FormDescription>
         </div>
+
 
         <div className='p-4 space-y-4 overflow-y-scroll'>
           {featureFields.map(key => (
