@@ -3,7 +3,7 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { PatientFeatures, PatientPredictionWithData, Shap } from './types';
 import trainEmbeddings from './train_embeddings.json';
-import { patientFeaturesFields } from './constants';
+import { graphColors, patientFeaturesFields } from './constants';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -56,8 +56,8 @@ export function createShapDataset({ shapBaseValue, data, shapValues }: Pick<Pati
   shaps.sort((a, b) => Math.abs(b.shapValue) - Math.abs(a.shapValue));
 
   const labels = shaps.map(s => `${patientFeaturesFields[s.feature as keyof PatientFeatures].label} = ${s.value}`);
-  const backgroundColors = shaps.map(s => s.shapValue > 0 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)');
-  const borderColors = shaps.map(s => s.shapValue > 0 ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)');
+  const backgroundColors = shaps.map(s => s.shapValue > 0 ? graphColors.fill.red : graphColors.fill.blue);
+  const borderColors = shaps.map(s => s.shapValue > 0 ? graphColors.stroke.red : graphColors.stroke.blue);
 
   const shapData = createShapDataArray(shapBaseValue, shaps);
 
@@ -89,7 +89,7 @@ export function createEmbeddingDataset(embeddings: PatientPredictionWithData['em
         data: currentData,
         pointStyle: 'rect',
         borderColor: 'rgb(0, 0, 0)',
-        backgroundColor: prediction > 50 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)',
+        backgroundColor: prediction > 50 ? graphColors.fill.red : graphColors.fill.blue,
         pointRadius: 12,
         pointHoverRadius: 14,
         pointBorderWidth: 4,
@@ -97,13 +97,13 @@ export function createEmbeddingDataset(embeddings: PatientPredictionWithData['em
       }, {
         label: 'No Diabetes',
         data: noDiabetesData,
-        borderColor: 'rgb(54, 162, 235)',
-        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        borderColor: graphColors.stroke.blue,
+        backgroundColor: graphColors.fill.blue,
       }, {
         label: 'Has Diabetes',
         data: hasDiabetesData,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: graphColors.stroke.red,
+        backgroundColor: graphColors.fill.red,
       }
     ]
   };

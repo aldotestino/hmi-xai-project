@@ -27,7 +27,7 @@ function PatientFeaturesTable({
             {Object.values(data).map(value => (
               <TableCell key={value}>{value}</TableCell>
             ))}
-            <TableCell className={cn('font-semibold text-green-500', prediction > 50 && 'text-red-500')}>{trunc(prediction, 2)}%</TableCell>
+            <TableCell className={cn('font-semibold text-blue-400', prediction > 50 && 'text-red-400')}>{trunc(prediction, 2)}%</TableCell>
           </TableRow>
         </TableBody>
       </Table>
