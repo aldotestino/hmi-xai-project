@@ -34,7 +34,7 @@ function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className='text-neutral-400 text-md font-semibold max-w-prose text-center py-4'
+          className='text-neutral-400 text-md font-semibold max-w-prose text-center py-6'
         >
           Stay ahead of diabetes and other health risks with GlycoGuard. 
           Using advanced AI and personalized data, GlycoGuard provides 

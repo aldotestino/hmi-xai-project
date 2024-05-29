@@ -76,14 +76,15 @@ export const barOptions: React.ComponentProps<typeof Bar>['options'] = {
           return [
             {
               fontColor: defaults.color as Color,
-              text: 'Increase Risk',
-              strokeStyle: graphColors.stroke.red,
-              fillStyle: graphColors.fill.red,
-            }, {
-              fontColor: defaults.color as Color,
               text: 'Decrease Risk',
               strokeStyle: graphColors.stroke.blue,
               fillStyle: graphColors.fill.blue,
+            },
+            {
+              fontColor: defaults.color as Color,
+              text: 'Increase Risk',
+              strokeStyle: graphColors.stroke.red,
+              fillStyle: graphColors.fill.red,
             }
           ];
         }
