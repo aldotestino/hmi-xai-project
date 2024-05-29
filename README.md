@@ -14,8 +14,17 @@ The app will be available at: http://localhost:3000
 
 # Screenshots
 
-Home page                                           |Patient page
-:--------------------------------------------------:|:-----------------------------------------------------------:
-![Home page](/images/home.jpeg?raw=true "Home Page")|![Patient page](/images/patient.jpeg?raw=true "Patient Page")
+### Splash Screen
+![Splash Screen](/images/splash.jpeg?raw=true "Splash Screen")
+
+## Dashboard
+![Dashboard](/images/dashboard.jpeg?raw=true "Dashboard")
+
+## PCA Embeddings
+![PCA Embeddings    ](/images/pca.jpeg?raw=true "PCA Embeddings")
+
+## Sgap Values
+![Shap Values](/images/shap.jpeg?raw=true "Shap Values")
+
 
 

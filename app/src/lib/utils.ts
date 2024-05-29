@@ -164,15 +164,13 @@ export function formatDate(date: Date): string {
     return `${dayNames[date.getDay()]} at ${time}`;
   } else {
 
-    const dayName = dayNames[date.getDay()];
-
     const day = date.getDate();
     const month = date.toLocaleString('default', { month: 'long' });
     const year = date.getFullYear();
 
     if (isSameYear(date, today))
-      return `${dayName} ${day} ${month} at ${time}`;
+      return `${day}/${month} at ${time}`;
 
-    return `${dayName} ${day} ${month} ${year} at ${time}`;
+    return `${day}/${month}/${year} at ${time}`;
   }
 }

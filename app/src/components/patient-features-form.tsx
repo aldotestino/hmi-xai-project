@@ -92,6 +92,7 @@ function PatientFeaturesForm({
             <div className='relative h-full flex-1 flex items-center mr-6 p-4 pr-0'>
               <p className='text-lg font-semibold text-muted-foreground'>Features</p>
               <Input
+                disabled={!isSearching}
                 className={cn('absolute transition-transform duration-300', isSearching ? 'translate-x-0' : 'translate-x-60')}
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
