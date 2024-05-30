@@ -82,6 +82,15 @@ function PatientFeaturesForm({
 
   const featureFields = useMemo(() => Object.keys(patientFeaturesSchema.shape)
     .filter(key => patientFeaturesFields[key as keyof PatientFeatures].label.toLowerCase().includes(searchTerm.toLowerCase())), [searchTerm]);
+
+  function handleSearch() {
+    if(!isSearching) {
+      setIsSearching(true);
+    }else {
+      setIsSearching(false);
+      setSearchTerm('');
+    }
+  }
     
   return (
     <Form {...form}>
@@ -100,7 +109,7 @@ function PatientFeaturesForm({
               />
             </div>
             <div className='z-10 bg-background p-4 pl-0'>
-              <Button variant="ghost" type='button' onClick={() => setIsSearching(!isSearching)}>
+              <Button variant="ghost" type='button' onClick={handleSearch}>
                 <Search className='h-4 w-4' />
               </Button>
             </div>
