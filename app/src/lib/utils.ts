@@ -169,8 +169,8 @@ export function formatDate(date: Date): string {
     const year = date.getFullYear();
 
     if (isSameYear(date, today))
-      return `${day}/${month} at ${time}`;
+      return `${day} ${month} at ${time}`;
 
-    return `${day}/${month}/${year} at ${time}`;
+    return `${day} ${month} ${year} at ${time}`;
   }
 }
