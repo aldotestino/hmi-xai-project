@@ -165,7 +165,7 @@ export function formatDate(date: Date): string {
   } else {
 
     const day = date.getDate();
-    const month = date.toLocaleString('default', { month: 'long' });
+    const month = date.toLocaleString('en-US', { month: 'long' });
     const year = date.getFullYear();
 
     if (isSameYear(date, today))
